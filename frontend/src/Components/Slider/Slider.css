@@ -1,0 +1,13 @@
+.slider {
+  /* border: 1px solid red; */
+  width: 100vw;
+  margin: auto;
+}
+.carouselCard {
+  /* border: 1px solid rgb(116, 68, 68); */
+
+
+}
+.carouselCard>img{
+    width: 100%;
+}
