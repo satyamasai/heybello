@@ -1,8 +1,8 @@
-import {  useState } from "react";
+import { useState } from "react";
 import mybellalogo from "./mybellalogo.jpg";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import "./Navbar.css";
-import { Link as ReactRouter } from "react-router-dom"
+import { Link as ReactRouter } from "react-router-dom";
 import {
   Box,
   Flex,
@@ -41,15 +41,13 @@ const NavLink = ({ children }) => (
 );
 
 // ------------------links-------------
-const links = [{ label: "Categories", path: "/categories" },
-{ label: "Blush", path: "/blush" },
-{ label: "Bronzer", path: "/bronzer" },
-{ label: "Eyebrow", path: "/eyebrow" },
-{ label: "Eyeliner", path: "/eyeliner" },
-{ label: "Eyeshadow", path: "/eyeshadow" },
-{ label: "Foundation", path: "/foundation" },
-{ label: "Lipliner", path: "/lipliner" },
-{ label: "Lipstick", path: "/lipstick" },
+const links = [
+  { label: "Categories", path: "/categories" },
+  { label: "Brands", path: "/brands" },
+  { label: "Luxe", path: "/luxe" },
+  { label: "Fashion", path: "/fashion" },
+  { label: "Beauty Advise", path: "/beautiadvise" }
+
 ];
 
 export default function Navbar() {
@@ -77,43 +75,13 @@ export default function Navbar() {
 
           <Flex w="40%" justifyContent={"space-around"}>
             <div className="category_nav_box">
-              <Box w={500} display={{ base: "none", sm: "none", md: "block" }}>
-                <div className="navbar">
-                  <a href="#home">Home</a>
-                  <div className="subnav">
-                    <button className="subnavbtn">
-                      About <i className="fa fa-caret-down"></i>
-                    </button>
-                    <div className="subnav-content">
-                      <a href="#company">Company</a>
-                      <a href="#team">Team</a>
-                      <a href="#careers">Careers</a>
-                    </div>
-                  </div>
-                  <div className="subnav">
-                    <button className="subnavbtn">
-                      Services <i className="fa fa-caret-down"></i>
-                    </button>
-                    <div className="subnav-content">
-                      <a href="#bring">Bring</a>
-                      <a href="#deliver">Deliver</a>
-                      <a href="#package">Package</a>
-                      <a href="#express">Express</a>
-                    </div>
-                  </div>
-                  <div className="subnav">
-                    <button className="subnavbtn">
-                      Partners <i className="fa fa-caret-down"></i>
-                    </button>
-                    <div className="subnav-content">
-                      <a href="#link1">Link 1</a>
-                      <a href="#link2">Link 2</a>
-                      <a href="#link3">Link 3</a>
-                      <a href="#link4">Link 4</a>
-                    </div>
-                  </div>
-                  <a href="#contact">Contact</a>
-                </div>
+              <Box color={"goldenrod"} justifyContent={"space-around"} border="1px" borderColor="grey.400" w={500} display={{ base: "none", sm: "none", md: "flex" }}>
+              {
+                   links.map((link)=>(
+           <Link m="5px" to={link.path}>{link.label}</Link>
+                   ))
+
+              }
               </Box>
               <Box display={{ md: "none" }}>
                 {!down ? (
@@ -130,21 +98,14 @@ export default function Navbar() {
                     top="70"
                     left={0}
                     w={"100vw"}
-                    
                     bg={"tomato"}
                     direction={"column"}
-                    
                   >
-                  {
-                     links.map((link)=>(
-                     <Link as={ReactRouter} to={link.path}  m="10px">{link.label}</Link>
-
-                     ))
-
-
-                  }
-                  
-                  
+                    {links.map((link) => (
+                      <Link  onClick={setDown.off} as={ReactRouter} to={link.path} m="10px">
+                        {link.label}
+                      </Link>
+                    ))}
                   </Flex>
                 )}
               </Box>
