@@ -100,6 +100,7 @@ export default function Navbar() {
                     w={"100vw"}
                     bg={"tomato"}
                     direction={"column"}
+                    zIndex={20}
                   >
                     {links.map((link) => (
                       <Link  onClick={setDown.off} as={ReactRouter} to={link.path} m="10px">
