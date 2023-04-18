@@ -1,26 +1,26 @@
-import { Badge, Box, Image } from "@chakra-ui/react"
+import { Badge, Box, Button, Image } from "@chakra-ui/react"
 import { StarIcon } from '@chakra-ui/icons'
 
 export default function BnbCard({item}) {
     console.log(item,"bnbitem")
-    const {api_featured_image ,brand,category,description,price,rating,image_link} = item
+    const {api_featured_image ,brand,category,description,price,rating,image_link,name} = item
     const property = {
-        
-      imageUrl:image_link ,
+
+      imageUrl:api_featured_image ,
       imageAlt: 'Rear view of modern home with pool',
-      beds: 3,
-      baths: 2,
+      brand: brand,
+      name,
       title: description,
       formattedPrice: '$'+ price,
-      reviewCount: 34,
+      reviewCount: rating,
       rating: rating,
     }
   
     return (
-      <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-        <Image src={property.imageUrl} alt={property.imageAlt} />
+      <Box m="5" p='2' color={"goldenrod"}  maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+        <Image  h='46%' w='80%' m="auto" src={property.imageUrl} alt={property.imageAlt} />
   
-        <Box p='6'>
+        <Box p='5'>
           <Box display='flex' alignItems='baseline'>
             <Badge borderRadius='full' px='2' colorScheme='teal'>
               New
@@ -33,7 +33,7 @@ export default function BnbCard({item}) {
               textTransform='uppercase'
               ml='2'
             >
-              {property.beds} beds &bull; {property.baths} baths
+              {property.brand} &bull; {property.name} 
             </Box>
           </Box>
   
@@ -54,18 +54,23 @@ export default function BnbCard({item}) {
             </Box>
           </Box>
   
-          <Box display='flex' mt='2' alignItems='center'>
+          <Box flexDirection={{base:"column" , md:"row"}}  display={{ base:"flex", md: "flex" }} mt='2' alignItems='center' justifyContent={"space-between"}>
+            <Box>
             {Array(5)
-              .fill('')
-              .map((_, i) => (
+                .fill('')
+                .map((_, i) => (
                 <StarIcon
                   key={i}
                   color={i < property.rating ? 'teal.500' : 'gray.300'}
                 />
-              ))}
+                ))}
+                </Box>
             <Box as='span' ml='2' color='gray.600' fontSize='sm'>
               {property.reviewCount} reviews
             </Box>
+            <Box as='span' ml='2' color='gray.600' fontSize='sm'>
+            <Button colorScheme="blue">Add to cart</Button>
+          </Box>
           </Box>
         </Box>
       </Box>
