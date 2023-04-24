@@ -17,7 +17,7 @@ export default function BnbCard({item}) {
     }
   
     return (
-      <Box m="5" p='2' color={"goldenrod"}  maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+      <Box className="bnbcard" boxSizing="border-box" h="420px" m="5" p='2' color={"goldenrod"}  maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
         <Image  h='46%' w='80%' m="auto" src={property.imageUrl} alt={property.imageAlt} />
   
         <Box p='5'>
@@ -55,7 +55,7 @@ export default function BnbCard({item}) {
           </Box>
   
           <Box flexDirection={{base:"column" , md:"row"}}  display={{ base:"flex", md: "flex" }} mt='2' alignItems='center' justifyContent={"space-between"}>
-            <Box>
+            <Box >
             {Array(5)
                 .fill('')
                 .map((_, i) => (
@@ -65,11 +65,11 @@ export default function BnbCard({item}) {
                 />
                 ))}
                 </Box>
-            <Box as='span' ml='2' color='gray.600' fontSize='sm'>
+            <Box color="goledrod" as='span' ml='2' fontSize='sm'>
               {property.reviewCount} reviews
             </Box>
             <Box as='span' ml='2' color='gray.600' fontSize='sm'>
-            <Button colorScheme="blue">Add to cart</Button>
+            <Button mt="3" size='sm' colorScheme="blue">Add to cart</Button>
           </Box>
           </Box>
         </Box>
