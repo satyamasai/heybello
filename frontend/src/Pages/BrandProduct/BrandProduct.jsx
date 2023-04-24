@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./BrandProduct.css";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import BnbCard from "../../Components/Bnbcard/BnbCard";
-import { Circles } from  'react-loader-spinner'
+import { RotatingSquare} from  'react-loader-spinner'
 import { Box } from "@chakra-ui/react";
 const BrandProduct = () => {
+  const navigate = useNavigate()
   const [products, setProducts] = useState([]);
   const [loader, setLoader] = useState(false);
   const { brandname } = useParams();
@@ -31,23 +32,34 @@ const BrandProduct = () => {
     getBrandProducts(brandname);
   }, [brandname]);
 
+// ------------------------handleViewSingle----------------------------
+
+const handleViewSingle =(single_item)=>{
+navigate(`/singleproduct/${single_item.id}`)
+// console.log("id",id)
+localStorage.setItem("single_product",JSON.stringify(single_item));
+
+
+
+
+}
+
   return (
     <div className="brandproduct">
       {!loader?products?.map((item) => (
-        <BnbCard item={item} />
+        <BnbCard handleViewSingle={handleViewSingle}  item={item} />
       )):<Box  margin="100"
       >
-      <Circles
-      height="220"
+      <RotatingSquare
+      height="230"
       width="220"
       color="goldenrod"
-      ariaLabel="circles-loading"
+      ariaLabel="rotating-square-loading"
+      strokeWidth="5"
       wrapperStyle={{}}
       wrapperClass=""
       visible={true}
-     
-      
-      />
+    />
       </Box> 
     }
     </div>

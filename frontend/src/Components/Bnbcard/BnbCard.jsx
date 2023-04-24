@@ -1,8 +1,9 @@
 import { Badge, Box, Button, Image } from "@chakra-ui/react"
 import { StarIcon } from '@chakra-ui/icons'
 
-export default function BnbCard({item}) {
-    console.log(item,"bnbitem")
+export default function BnbCard({item ,handleViewSingle}) {
+    // console.log("bnbitem",handleViewSingle)
+    // console.log(item)
     const {api_featured_image ,brand,category,description,price,rating,image_link,name} = item
     const property = {
 
@@ -17,7 +18,7 @@ export default function BnbCard({item}) {
     }
   
     return (
-      <Box className="bnbcard" boxSizing="border-box" h="420px" m="5" p='2' color={"goldenrod"}  maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+      <Box onClick={()=>handleViewSingle(item)} className="bnbcard" boxSizing="border-box" h="420px" m="5" p='2' color={"goldenrod"}  maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
         <Image  h='46%' w='80%' m="auto" src={property.imageUrl} alt={property.imageAlt} />
   
         <Box p='5'>
