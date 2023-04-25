@@ -3,6 +3,7 @@ import mybellalogo from "./mybellalogo.jpg";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import "./Navbar.css";
 import { Link as ReactRouter } from "react-router-dom";
+import { FaCartPlus } from "react-icons/fa";
 import {
   Box,
   Flex,
@@ -24,6 +25,7 @@ import {
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { IconButton } from "@chakra-ui/react";
+import Cart from "../../Pages/Cart/Cart";
 
 const NavLink = ({ children }) => (
   <Link
@@ -46,8 +48,7 @@ const links = [
   { label: "Brands", path: "/brands" },
   { label: "Luxe", path: "/luxe" },
   { label: "Fashion", path: "/fashion" },
-  { label: "Beauty Advise", path: "/beautiadvise" }
-
+  { label: "Beauty Advise", path: "/beautiadvise" },
 ];
 
 export default function Navbar() {
@@ -70,18 +71,26 @@ export default function Navbar() {
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <Box bg={""}>
-            <img className="logo_img" src={mybellalogo} alt="logo" />{" "}
+            <a href="/">
+              <img className="logo_img" src={mybellalogo} alt="logo" />{" "}
+            </a>
           </Box>
 
           <Flex w="40%" justifyContent={"space-around"}>
             <div className="category_nav_box">
-              <Box color={"goldenrod"} justifyContent={"space-around"} border="1px" borderColor="grey.400" w={500} display={{ base: "none", sm: "none", md: "flex" }}>
-              {
-                   links.map((link)=>(
-           <Link m="5px" to={link.path}>{link.label}</Link>
-                   ))
-
-              }
+              <Box
+                color={"goldenrod"}
+                justifyContent={"space-around"}
+                border="1px"
+                borderColor="grey.400"
+                w={500}
+                display={{ base: "none", sm: "none", md: "flex" }}
+              >
+                {links.map((link) => (
+                  <Link m="5px" to={link.path}>
+                    {link.label}
+                  </Link>
+                ))}
               </Box>
               <Box display={{ md: "none" }}>
                 {!down ? (
@@ -103,7 +112,12 @@ export default function Navbar() {
                     zIndex={20}
                   >
                     {links.map((link) => (
-                      <Link  onClick={setDown.off} as={ReactRouter} to={link.path} m="10px">
+                      <Link
+                        onClick={setDown.off}
+                        as={ReactRouter}
+                        to={link.path}
+                        m="10px"
+                      >
                         {link.label}
                       </Link>
                     ))}
@@ -114,6 +128,7 @@ export default function Navbar() {
           </Flex>
 
           <Flex bg={""} alignItems={"center"}>
+            <Cart />
             <Stack direction={"row"} spacing={7}>
               <Button onClick={toggleColorMode}>
                 {colorMode === "light" ? <MoonIcon /> : <SunIcon />}

@@ -3,10 +3,11 @@ import "./BrandProduct.css";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import BnbCard from "../../Components/Bnbcard/BnbCard";
-import { RotatingSquare} from  'react-loader-spinner'
+import { RotatingSquare } from "react-loader-spinner";
 import { Box } from "@chakra-ui/react";
+import Filter from "../../Components/Filter/Filter";
 const BrandProduct = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [loader, setLoader] = useState(false);
   const { brandname } = useParams();
@@ -19,7 +20,7 @@ const BrandProduct = () => {
       )
       .then((res) => {
         console.log(res);
-        setLoader(false)
+        setLoader(false);
         setProducts(res.data);
       })
       .catch((err) => {
@@ -32,36 +33,46 @@ const BrandProduct = () => {
     getBrandProducts(brandname);
   }, [brandname]);
 
-// ------------------------handleViewSingle----------------------------
+  // ------------------------handleViewSingle----------------------------
 
-const handleViewSingle =(single_item)=>{
-navigate(`/singleproduct/${single_item.id}`)
-// console.log("id",id)
-localStorage.setItem("single_product",JSON.stringify(single_item));
-
-
-
-
-}
+  const handleViewSingle = (single_item) => {
+    navigate(`/singleproduct/${single_item.id}`);
+    // console.log("id",id)
+    localStorage.setItem("single_product", JSON.stringify(single_item));
+  };
+  // -------------handle filter-----------------
+  const handleFilter = (value) => {
+    console.log(value, "filtervalue");
+    if (value == "asc") {
+      const sortedProducts = [...products].sort((a, b) => a.price - b.price);
+      setProducts(sortedProducts);
+    } else if (value == "desc") {
+      const sortedProducts = [...products].sort((a, b) => b.price - a.price);
+      setProducts(sortedProducts);
+    }
+  };
 
   return (
     <div className="brandproduct">
-      {!loader?products?.map((item) => (
-        <BnbCard handleViewSingle={handleViewSingle}  item={item} />
-      )):<Box  margin="100"
-      >
-      <RotatingSquare
-      height="230"
-      width="220"
-      color="goldenrod"
-      ariaLabel="rotating-square-loading"
-      strokeWidth="5"
-      wrapperStyle={{}}
-      wrapperClass=""
-      visible={true}
-    />
-      </Box> 
-    }
+      <Filter handleFilter={handleFilter} />
+      {!loader ? (
+        products?.map((item) => (
+          <BnbCard handleViewSingle={handleViewSingle} item={item} />
+        ))
+      ) : (
+        <Box margin="100">
+          <RotatingSquare
+            height="230"
+            width="220"
+            color="goldenrod"
+            ariaLabel="rotating-square-loading"
+            strokeWidth="5"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+          />
+        </Box>
+      )}
     </div>
   );
 };

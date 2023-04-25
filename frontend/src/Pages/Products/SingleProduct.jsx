@@ -19,12 +19,32 @@ import {
 } from "@chakra-ui/react";
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { useParams } from "react-router-dom";
-// import { MdLocalShipping } from "react-icons/md";
+import { MdLocalShipping } from "react-icons/md";
+import { useToast } from '@chakra-ui/react'
 const SingleProduct = () => {
+  const cartItems = JSON.parse(localStorage.getItem("cartItems")) || []
+    const toast = useToast()
   const { id } = useParams();
   console.log(id, "params");
   const single_product = JSON.parse(localStorage.getItem("single_product"));
   console.log(single_product, "sp");
+
+
+
+//   h--------------handle ADDED KART----------------
+const handleAdded= (cartproduct)=>{
+   cartItems.push(cartproduct)
+   localStorage.setItem("cartItems", JSON.stringify(cartItems))
+
+    toast({
+        title: 'Product added.',
+        description: "We've added your product to the cart.",
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+      })
+
+}
 
   return (
     <div className="sindle_product_page">
@@ -55,7 +75,8 @@ const SingleProduct = () => {
                 {single_product.name}
               </Heading>
               <Text
-                color={useColorModeValue("gray.900", "gray.400")}
+            
+                color={'goldenrod'}
                 fontWeight={300}
                 fontSize={"2xl"}
               >
@@ -147,32 +168,21 @@ const SingleProduct = () => {
                       {single_product.product_colors.map((color) => (
                         <Box
                           m={"3px"}
-                          w={"50px"}
-                          h={"50px"}
+                          w={"35px"}
+                          h={"35px"}
                           borderRadius={"50%"}
                           bg={color.hex_value}
                         ></Box>
                       ))}
                     </Box>
                   </ListItem>
-                  <ListItem>
-                    <Text as={"span"} fontWeight={"bold"}>
-                      Crystal:
-                    </Text>{" "}
-                    Domed, scratch‑resistant sapphire crystal with
-                    anti‑reflective treatment inside
-                  </ListItem>
-                  <ListItem>
-                    <Text as={"span"} fontWeight={"bold"}>
-                      Water resistance:
-                    </Text>{" "}
-                    5 bar (50 metres / 167 feet){" "}
-                  </ListItem>
+              
                 </List>
               </Box>
             </Stack>
 
             <Button
+              onClick={()=>handleAdded(single_product)}
               rounded={"none"}
               w={"full"}
               mt={8}
@@ -194,7 +204,7 @@ const SingleProduct = () => {
               alignItems="center"
               justifyContent={"center"}
             >
-              <FaTwitter />
+              <MdLocalShipping  />
               <Text>2-3 business days delivery</Text>
             </Stack>
           </Stack>
