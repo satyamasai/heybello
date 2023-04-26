@@ -55,7 +55,7 @@ export default function Navbar() {
   const [down, setDown] = useBoolean(false);
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const heyBelloLoginToken = false;
   const [isBoxVisible, setIsBoxVisible] = useState(false);
 
   const handleMouseOver = () => {
@@ -135,20 +135,33 @@ export default function Navbar() {
               </Button>
 
               <Menu>
-                <MenuButton
-                  as={Button}
-                  rounded={"full"}
-                  variant={"link"}
-                  cursor={"pointer"}
-                  minW={0}
-                >
-                  <Avatar
-                    size={"sm"}
-                    src={
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLCSy6Nfn8qEh-1dav0-l6A4TXudU6xzfTvMVZEWegjA&usqp=CAU&ec=48665698"
-                    }
-                  />
-                </MenuButton>
+                {heyBelloLoginToken ? (
+                  <MenuButton
+                    as={Button}
+                    rounded={"full"}
+                    variant={"link"}
+                    cursor={"pointer"}
+                    minW={0}
+                  >
+                    <Avatar
+                      size={"sm"}
+                      src={
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLCSy6Nfn8qEh-1dav0-l6A4TXudU6xzfTvMVZEWegjA&usqp=CAU&ec=48665698"
+                      }
+                    />
+                  </MenuButton>
+                ) : (
+                  <Box>
+                    <ReactRouter to="/login">
+                      <Button>Login</Button>
+                    </ReactRouter>
+
+                    <ReactRouter to="/signup">
+                      <Button> Signup </Button>
+                    </ReactRouter>
+                  </Box>
+                )}
+
                 <MenuList alignItems={"center"}>
                   <br />
                   <Center>
