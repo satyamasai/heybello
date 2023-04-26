@@ -25,9 +25,9 @@ const SingleProduct = () => {
   const cartItems = JSON.parse(localStorage.getItem("cartItems")) || []
     const toast = useToast()
   const { id } = useParams();
-  console.log(id, "params");
-  const single_product = JSON.parse(localStorage.getItem("single_product"));
-  console.log(single_product, "sp");
+ 
+  const single_product = JSON.parse(localStorage.getItem("single_product")) || [];
+
 
 
 
@@ -48,7 +48,7 @@ const handleAdded= (cartproduct)=>{
 
   return (
     <div className="sindle_product_page">
-      <Container maxW={"7xl"}>
+      {<Container maxW={"7xl"}>
         <SimpleGrid
           columns={{ base: 1, lg: 2 }}
           spacing={{ base: 8, md: 10 }}
@@ -95,8 +95,10 @@ const handleAdded= (cartproduct)=>{
             >
               <VStack spacing={{ base: 4, sm: 6 }}>
                 <Text
+                
+                textAlign={'left'}
                   color={useColorModeValue("gray.500", "gray.400")}
-                  fontSize={"2xl"}
+                  fontSize={"xl"}
                   fontWeight={"300"}
                 >
                   {single_product.description}
@@ -209,7 +211,7 @@ const handleAdded= (cartproduct)=>{
             </Stack>
           </Stack>
         </SimpleGrid>
-      </Container>
+      </Container> }
     </div>
   );
 };

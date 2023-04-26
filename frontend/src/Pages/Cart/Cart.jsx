@@ -28,19 +28,27 @@ export default function Cart() {
       </Button>
 
       <Drawer
+       
         isOpen={isOpen}
         placement="right"
         onClose={onClose}
         finalFocusRef={btnRef}
+      
       >
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Create your account</DrawerHeader>
+          <DrawerHeader>Cart</DrawerHeader>
 
           <DrawerBody>
             {cartItems?.map((item) => (
-              <Box w={"99%"} border={"1px solid goldenrod"} h={"150px"}>
+              <Box
+                mt={'4px'}
+                boxSizing="border-box"
+                w={"99%"}
+                border={"1px solid goldenrod"}
+                h={"150px"}
+              >
                 <Flex h={"70%"} border={""}>
                   <img
                     src={item.api_featured_image}
@@ -49,25 +57,35 @@ export default function Cart() {
                     height={"80px"}
                   />
 
-                  <Flex justify={"center"} m={"auto"} h={"80%"} border={""}>
+                  <Flex
+                    p={"3px"}
+                    justify={"space-between"}
+                    m={"auto"}
+                    h={"75%"}
+                    border={""}
+                  >
                     {item.name}-{item.brand}- {item.product_type}
                   </Flex>
                 </Flex>
                 <Flex
                   h={"30%"}
-                  border={"1px solid "}
-                  justify={"space-around"}
+                  border={""}
+                  justify={"space-between"}
                   alignItems={"center"}
                   textAlign={"center"}
                 >
                   <Flex
+                    p={"3px"}
                     justify={"space-between"}
-                    w={"50%"}
+                    w={"55%"}
                     alignItems={"center"}
+                    border={""}
                   >
                     Quantity :
-                    <Select border={"none"} w={"45%"}>
-                      <option value="1">1</option>
+                    <Select outline={"0"} border={"none"} w={"42%"}>
+                      <option outline={"0"} value="1">
+                        1
+                      </option>
                       <option value="2">2</option>
                       <option value="3">3</option>
                     </Select>{" "}
