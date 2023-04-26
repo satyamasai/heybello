@@ -49,6 +49,8 @@ const links = [
   { label: "Luxe", path: "/luxe" },
   { label: "Fashion", path: "/fashion" },
   { label: "Beauty Advise", path: "/beautiadvise" },
+  { label: "Login", path: "/login" },
+  { label: "Signup", path: "/signup" }
 ];
 
 export default function Navbar() {
@@ -151,7 +153,7 @@ export default function Navbar() {
                     />
                   </MenuButton>
                 ) : (
-                  <Box>
+                  <Box display={{sm:"none" , base:"none"}}>
                     <ReactRouter to="/login">
                       <Button>Login</Button>
                     </ReactRouter>
