@@ -14,7 +14,7 @@ import {
   useColorModeValue,
   Link,
 } from "@chakra-ui/react";
-import {Link as ReactRouter}  from 'react-router-dom';
+import { Link as ReactRouter } from "react-router-dom";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
@@ -27,16 +27,15 @@ export default function Signup() {
 
   // ------------handle signup----------------
   const handleSignup = () => {
-    if(fname && lname && email && password ){
-
+    if (fname && lname && email && password) {
       const userData = {
         name: fname + " " + lname,
         email,
         password,
       };
-      console.log(userData)
-    }else{
-      alert("please fill all the details correctly...!")
+      console.log(userData);
+    } else {
+      alert("please fill all the details correctly...!");
     }
   };
 
@@ -68,7 +67,7 @@ export default function Signup() {
                 <FormControl id="firstName" isRequired>
                   <FormLabel>First Name</FormLabel>
                   <Input
-                  isRequired={true}
+                    isRequired={true}
                     type="text"
                     onChange={(e) => {
                       setFname(e.target.value);
@@ -87,6 +86,8 @@ export default function Signup() {
                   />
                 </FormControl>
               </Box>
+
+             
             </HStack>
             <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
@@ -97,6 +98,16 @@ export default function Signup() {
                 }}
               />
             </FormControl>
+            <FormControl id="mobile" isRequired>
+              <FormLabel>Mobile</FormLabel>
+              <Input
+                type="mobile"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
+            </FormControl>
+
             <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
               <InputGroup>
@@ -134,7 +145,10 @@ export default function Signup() {
             </Stack>
             <Stack pt={6}>
               <Text align={"center"}>
-                Already a user? <ReactRouter to="/login" color={"blue.400"}>Login</ReactRouter>
+                Already a user?{" "}
+                <ReactRouter to="/login" color={"blue.400"}>
+                  Login
+                </ReactRouter>
               </Text>
             </Stack>
           </Stack>
