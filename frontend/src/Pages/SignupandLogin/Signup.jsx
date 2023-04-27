@@ -17,23 +17,35 @@ import {
 import { Link as ReactRouter } from "react-router-dom";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import axios from "axios";
 
 export default function Signup() {
   const [showPassword, setShowPassword] = useState(false);
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
+  const [mobile, setMobile] = useState();
   const [password, setPassword] = useState("");
 
   // ------------handle signup----------------
   const handleSignup = () => {
-    if (fname && lname && email && password) {
+    if (fname && mobile && email && password) {
       const userData = {
         name: fname + " " + lname,
         email,
         password,
+        mobile,
       };
       console.log(userData);
+      axios
+        .post("http://localhost:8080/signup", userData)
+        .then((res) => {
+          console.log("success user");
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
       alert("please fill all the details correctly...!");
     }
@@ -86,8 +98,6 @@ export default function Signup() {
                   />
                 </FormControl>
               </Box>
-
-             
             </HStack>
             <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
@@ -103,7 +113,7 @@ export default function Signup() {
               <Input
                 type="mobile"
                 onChange={(e) => {
-                  setEmail(e.target.value);
+                  setMobile(e.target.value);
                 }}
               />
             </FormControl>

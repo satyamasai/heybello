@@ -3,18 +3,19 @@ const { connection } = require("./Config/db");
 const app = express();
 require("dotenv").config();
 const cors = require("cors");
+const { userRouter } = require("./Routes/user.routes");
 app.use(express.json());
-app.use(cors);
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send({ msg: "Welcome to hey bello..!!!" });
 });
 
+// ------------user API--------------##-----
 
+app.use("/",userRouter);
 
-
-
-
+// ##--------------##--------------------##
 
 // ----Listening ---------
 app.listen(process.env.PORT, async () => {
