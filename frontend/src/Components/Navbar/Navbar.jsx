@@ -50,7 +50,7 @@ const links = [
   { label: "Fashion", path: "/fashion" },
   { label: "Beauty Advise", path: "/beautiadvise" },
   { label: "Login", path: "/login" },
-  { label: "Signup", path: "/signup" }
+  { label: "Signup", path: "/signup" },
 ];
 
 export default function Navbar() {
@@ -112,6 +112,7 @@ export default function Navbar() {
                     bg={"tomato"}
                     direction={"column"}
                     zIndex={20}
+                    className="nav_dropdownmenu"
                   >
                     {links.map((link) => (
                       <Link
@@ -153,7 +154,7 @@ export default function Navbar() {
                     />
                   </MenuButton>
                 ) : (
-                  <Box display={{sm:"none" , base:"none"}}>
+                  <Box display={{ sm: "none", base: "none" }}>
                     <ReactRouter to="/login">
                       <Button>Login</Button>
                     </ReactRouter>
