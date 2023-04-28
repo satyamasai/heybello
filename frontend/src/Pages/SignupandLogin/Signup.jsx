@@ -46,6 +46,12 @@ export default function Signup() {
         .catch((err) => {
           console.log(err);
         });
+
+        setFname("")
+        setLname("")
+        setEmail("")
+        setMobile("")
+        setPassword("")
     } else {
       alert("please fill all the details correctly...!");
     }
@@ -79,6 +85,7 @@ export default function Signup() {
                 <FormControl id="firstName" isRequired>
                   <FormLabel>First Name</FormLabel>
                   <Input
+                  value={fname}
                     isRequired={true}
                     type="text"
                     onChange={(e) => {
@@ -91,6 +98,7 @@ export default function Signup() {
                 <FormControl id="lastName">
                   <FormLabel>Last Name</FormLabel>
                   <Input
+                  value={lname}
                     type="text"
                     onChange={(e) => {
                       setLname(e.target.value);
@@ -102,6 +110,7 @@ export default function Signup() {
             <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
               <Input
+              value={email}
                 type="email"
                 onChange={(e) => {
                   setEmail(e.target.value);
@@ -111,6 +120,7 @@ export default function Signup() {
             <FormControl id="mobile" isRequired>
               <FormLabel>Mobile</FormLabel>
               <Input
+              value={mobile}
                 type="mobile"
                 onChange={(e) => {
                   setMobile(e.target.value);
@@ -122,6 +132,7 @@ export default function Signup() {
               <FormLabel>Password</FormLabel>
               <InputGroup>
                 <Input
+                value={password}
                   type={showPassword ? "text" : "password"}
                   onChange={(e) => {
                     setPassword(e.target.value);
