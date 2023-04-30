@@ -89,9 +89,9 @@ export default function Navbar() {
                 display={{ base: "none", sm: "none", md: "flex" }}
               >
                 {links.map((link) => (
-                  <Link m="5px" to={link.path}>
-                    {link.label}
-                  </Link>
+                  <ReactRouter m="5px" to={link.path}>
+                    {link.label }
+                  </ReactRouter>
                 ))}
               </Box>
               <Box display={{ md: "none" }}>

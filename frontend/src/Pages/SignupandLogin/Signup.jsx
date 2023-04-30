@@ -64,7 +64,7 @@ export default function Signup() {
       justify={"center"}
       bg={useColorModeValue("gray.50", "gray.800")}
     >
-      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+      <Stack color={'goldenrod'} spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
           <Heading fontSize={"4xl"} textAlign={"center"}>
             Sign up
@@ -85,6 +85,8 @@ export default function Signup() {
                 <FormControl id="firstName" isRequired>
                   <FormLabel>First Name</FormLabel>
                   <Input
+                  outline={'goldenrod'}
+                  border={'1px solid goldenrod'}
                   value={fname}
                     isRequired={true}
                     type="text"
@@ -98,6 +100,7 @@ export default function Signup() {
                 <FormControl id="lastName">
                   <FormLabel>Last Name</FormLabel>
                   <Input
+                  border={'1px solid goldenrod'}
                   value={lname}
                     type="text"
                     onChange={(e) => {
@@ -110,6 +113,7 @@ export default function Signup() {
             <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
               <Input
+              border={'1px solid goldenrod'}
               value={email}
                 type="email"
                 onChange={(e) => {
@@ -120,6 +124,7 @@ export default function Signup() {
             <FormControl id="mobile" isRequired>
               <FormLabel>Mobile</FormLabel>
               <Input
+              border={'1px solid goldenrod'}
               value={mobile}
                 type="mobile"
                 onChange={(e) => {
@@ -132,6 +137,7 @@ export default function Signup() {
               <FormLabel>Password</FormLabel>
               <InputGroup>
                 <Input
+                border={'1px solid goldenrod'}
                 value={password}
                   type={showPassword ? "text" : "password"}
                   onChange={(e) => {

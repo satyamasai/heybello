@@ -11,19 +11,47 @@ import {
   Heading,
   Text,
   useColorModeValue,
+  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [logging, setLogging] = useState(false);
+const navigate = useNavigate()
+const toast= useToast()
   const handleLogin = () => {
-    if(email && password){
 
-      console.log(email,password);
-    }else{
-      return 
+    let hbToken=localStorage.getItem("hbToken") || null;
+    if(hbToken) navigate("/")
+    if (email && password) {
+      let userLoginData = { email, password };
+      setLogging(true)
+      axios
+      .post("http://localhost:8080/login", userLoginData)
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem("hbToken",JSON.stringify(res.data.token))
+        setLogging(false)
+        navigate("/")
+        toast({
+          title: 'Login successfully.',
+          description: "You can purchase smoothly..",
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        })
+
+      })
+      .catch((err) => {
+        console.log(err);
+        setLogging(false)
+        });
+    } else {
+      return;
     }
   };
 
@@ -75,16 +103,31 @@ export default function Login() {
                 <Checkbox>Remember me</Checkbox>
                 <Link color={"blue.400"}>Forgot password?</Link>
               </Stack>
-              <Button
-                onClick={handleLogin}
-                bg={"blue.400"}
-                color={"white"}
-                _hover={{
-                  bg: "blue.500",
-                }}
-              >
-                Sign in
-              </Button>
+              {!logging ? (
+                <Button
+                  onClick={handleLogin}
+                  bg={"blue.400"}
+                  color={"white"}
+                  _hover={{
+                    bg: "blue.500",
+                  }}
+                >
+                  Sign in
+                </Button>
+              ) : (
+                <Button
+                  onClick={handleLogin}
+                  isLoading
+                  loadingText="Logging in.."
+                  bg={"blue.400"}
+                  color={"white"}
+                  _hover={{
+                    bg: "blue.500",
+                  }}
+                >
+                  Sign in
+                </Button>
+              )}
             </Stack>
           </Stack>
         </Box>
