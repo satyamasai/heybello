@@ -85,9 +85,12 @@ export default function Navbar() {
                 justifyContent={"space-around"}
                 border="1px"
                 borderColor="grey.400"
-                w={500}
+                w={'35rem'}
+                h={'50px'}
                 display={{ base: "none", sm: "none", md: "flex" }}
-              >
+                 textAlign={'center'}
+                 alignItems={'center'}
+                >
                 {links.map((link) => (
                   <ReactRouter m="5px" to={link.path}>
                     {link.label }

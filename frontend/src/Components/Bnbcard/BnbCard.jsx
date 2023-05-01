@@ -1,4 +1,4 @@
-import { Badge, Box, Button, Image } from "@chakra-ui/react"
+import { Badge, Box, Button, Image, Skeleton, useToast } from "@chakra-ui/react"
 import { StarIcon } from '@chakra-ui/icons'
 
 export default function BnbCard({item ,handleViewSingle}) {
@@ -16,11 +16,34 @@ export default function BnbCard({item ,handleViewSingle}) {
       reviewCount: rating,
       rating: rating,
     }
+
+
+    // ----------##handle add to cart----##------------//
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || []
+    const toast = useToast()
+const handleAddToCart=(cartproduct)=>{
+
+ 
+    cartItems.push(cartproduct)
+    localStorage.setItem("cartItems", JSON.stringify(cartItems))
+ 
+     toast({
+         title: 'Product added.',
+         description: "We've added your product to the cart.",
+         status: 'success',
+         duration: 2000,
+         isClosable: true,
+       })
+ 
+ 
+
+}
+
   
     return (
-      <Box onClick={()=>handleViewSingle(item)} className="bnbcard" boxSizing="border-box" h="420px" m="5" p='2' color={"goldenrod"}  maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-        <Image  h='46%' w='80%' m="auto" src={property.imageUrl} alt={property.imageAlt} />
-  
+      <Box  className="bnbcard" boxSizing="border-box" h="420px" m="5" p='2' color={"goldenrod"}  maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+{item? <Image onClick={()=>handleViewSingle(item)}  h='46%' w='80%' m="auto" src={property.imageUrl} alt={property.imageAlt} />:<Skeleton/>
+}  
         <Box p='5'>
           <Box display='flex' alignItems='baseline'>
             <Badge borderRadius='full' px='2' colorScheme='teal'>
@@ -70,7 +93,7 @@ export default function BnbCard({item ,handleViewSingle}) {
               {property.reviewCount} reviews
             </Box>
             <Box as='span' ml='2' color='gray.600' fontSize='sm'>
-            <Button mt="3" size='sm' colorScheme="blue">Add to cart</Button>
+            <Button onClick={()=>handleAddToCart(item)} mt="3" size='sm' colorScheme="blue">Add to cart</Button>
           </Box>
           </Box>
         </Box>

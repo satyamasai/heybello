@@ -2,6 +2,8 @@ import React from 'react'
 import SimpleSlider from '../Components/Slider/SimpleSlider'
 import Trending from '../Components/Trending/Trending'
 import PopularBrands from '../Components/PopularBrands/PopularBrands'
+import Footer from '../Components/Footer/Footer'
+import Features from '../Components/Features/Features'
 
 const Home = () => {
   return (
@@ -9,6 +11,8 @@ const Home = () => {
     <SimpleSlider/>
     <PopularBrands/>
     <Trending/>
+    <Features/>
+    <Footer/>
     </div>
   )
 }

@@ -4,14 +4,15 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import BnbCard from "../../Components/Bnbcard/BnbCard";
 import { RotatingSquare } from "react-loader-spinner";
-import { Box } from "@chakra-ui/react";
+import { Box, SkeletonCircle, SkeletonText } from "@chakra-ui/react";
 import Filter from "../../Components/Filter/Filter";
+import { Skeleton } from 'react-loading-skeleton';
 const BrandProduct = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [loader, setLoader] = useState(false);
   const { brandname } = useParams();
-
+  const SkeletonNums=[1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9]
   const getBrandProducts = (brandname) => {
     setLoader(true);
     axios
@@ -55,24 +56,22 @@ const BrandProduct = () => {
   return (
     <div className="brandproduct">
       <Filter handleFilter={handleFilter} />
-      {!loader ? (
+      {!loader && (
         products?.map((item) => (
           <BnbCard handleViewSingle={handleViewSingle} item={item} />
         ))
-      ) : (
-        <Box margin="100">
-          <RotatingSquare
-            height="230"
-            width="220"
-            color="goldenrod"
-            ariaLabel="rotating-square-loading"
-            strokeWidth="5"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
-          />
-        </Box>
-      )}
+      ) }
+
+  {/** -----##  Skeleton effect ##------- */}
+  {loader && (
+    SkeletonNums?.map((item ,index) => (
+      <Box key={index} border={'1px solid goldenrod'} m={5} w={340} h={300} padding='6' boxShadow='lg' bg='grey.300' borderRadius={12}>
+      <SkeletonCircle size='10' />
+      <SkeletonText mt='4' noOfLines={4} spacing='4' skeletonHeight='2' />
+    </Box>
+    ))
+  ) }
+
     </div>
   );
 };
