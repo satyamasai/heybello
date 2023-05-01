@@ -3,10 +3,10 @@ import "./BrandProduct.css";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import BnbCard from "../../Components/Bnbcard/BnbCard";
-import { RotatingSquare } from "react-loader-spinner";
+// import { RotatingSquare } from "react-loader-spinner";
 import { Box, SkeletonCircle, SkeletonText } from "@chakra-ui/react";
 import Filter from "../../Components/Filter/Filter";
-import { Skeleton } from 'react-loading-skeleton';
+
 const BrandProduct = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);

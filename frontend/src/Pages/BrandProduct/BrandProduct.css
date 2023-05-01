@@ -5,6 +5,7 @@
    display: flex;
    flex-wrap: wrap;
    justify-content: space-evenly;
+   background-image: linear-gradient(to right top, #dee3eb, #c5d0fa, #c1b7ff, #d198fd, #ec6de7);
 
 
 }
