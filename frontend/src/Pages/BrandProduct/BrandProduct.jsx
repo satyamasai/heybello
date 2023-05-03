@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import BnbCard from "../../Components/Bnbcard/BnbCard";
 // import { RotatingSquare } from "react-loader-spinner";
-import { Box, SkeletonCircle, SkeletonText } from "@chakra-ui/react";
+import { Box, SimpleGrid, SkeletonCircle, SkeletonText } from "@chakra-ui/react";
 import Filter from "../../Components/Filter/Filter";
 
 const BrandProduct = () => {
@@ -56,16 +56,18 @@ const BrandProduct = () => {
   return (
     <div className="brandproduct">
       <Filter handleFilter={handleFilter} />
+      <SimpleGrid  columns={{sm:1,base:2,md:4}}>
       {!loader && (
         products?.map((item) => (
           <BnbCard handleViewSingle={handleViewSingle} item={item} />
-        ))
-      ) }
+          ))
+          ) }
+          </SimpleGrid>
 
   {/** -----##  Skeleton effect ##------- */}
   {loader && (
     SkeletonNums?.map((item ,index) => (
-      <Box key={index} border={'1px solid goldenrod'} m={5} w={340} h={300} padding='6' boxShadow='lg' bg='grey.300' borderRadius={12}>
+      <Box key={index} border={''} m={3} w={300} h={360} padding='6' boxShadow='lg' bg='grey.300' borderRadius={12}>
       <SkeletonCircle size='10' />
       <SkeletonText mt='4' noOfLines={4} spacing='4' skeletonHeight='2' />
     </Box>

@@ -8,11 +8,14 @@ import {
   Skeleton,
   SkeletonCircle,
   SkeletonText,
+  useToast,
 } from "@chakra-ui/react";
 import { MdAddShoppingCart } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 const Trending = () => {
   const [trendingProducts, setTrendingProducts] = useState([]);
   const [loader, setLoader] = useState(true);
+  const navigate = useNavigate();
   const skelatonNums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   // ------###----Get trendings------###---//
   const getTrendingProduct = () => {
@@ -36,19 +39,53 @@ const Trending = () => {
     getTrendingProduct();
   }, []);
 
+  // ----###-----handleSingleProduct-----###----------
+  const handleSingleProduct = (single_product) => {
+    navigate(`/singleproduct/${single_product.id}`);
+    localStorage.setItem("single_product", JSON.stringify(single_product));
+  };
+
+
+    // ----------##handle add to cart----##------------//
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const toast = useToast();
+    const handleAddToCart = (cartproduct) => {
+      cartItems.push(cartproduct);
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  
+      toast({
+        title: "Product added.",
+        description: "We've added your product to the cart.",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+      });
+    };
   return (
     <div className="trending">
       <Flex gap={"4"} flexWrap={"wrap"}>
         {!loader &&
-          trendingProducts.map((product) => (
-            <div className="t_product_card">
-              <img src={product.api_featured_image} alt="" />
+          trendingProducts.map((product, index) => (
+            <div key={index} className="t_product_card">
+              <img
+                onClick={() => handleSingleProduct(product)}
+                src={product.api_featured_image}
+                alt=""
+              />
               <div className="t_product_inner_div">
                 <div>
                   <p>{product.name}</p>
                 </div>
                 <div>
+                  {" "}
+                  <span>
+                    <strike>₹{Math.floor(product.price) + 10}</strike>{" "}
+                  </span>{" "}
+                  ₹ <span style={{ color: "black" }}>{product.price}</span>
+                </div>
+                <div>
                   <Button
+                  onClick={()=>handleAddToCart(product)}
                     leftIcon={<MdAddShoppingCart />}
                     colorScheme="pink"
                     variant="solid"
@@ -62,8 +99,17 @@ const Trending = () => {
           ))}
 
         {loader &&
-          skelatonNums.map(() => (
-            <Box borderRadius={12} m={5} w={240} h={340}  padding="6" boxShadow="lg" bg="grey.200">
+          skelatonNums.map((el, index) => (
+            <Box
+              key={index}
+              borderRadius={12}
+              m={5}
+              w={240}
+              h={340}
+              padding="6"
+              boxShadow="lg"
+              bg="grey.200"
+            >
               <SkeletonCircle size="10" />
               <SkeletonText
                 mt="4"
