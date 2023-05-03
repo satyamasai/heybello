@@ -32,7 +32,7 @@ console.log(brand_name,"bnnnnnn")
       .then((res) => {
         setAllBrands(res.data);
         console.log(allBrand, "an");
-        setLoader(false);
+       
         allBrand.map(async (el) => await allBrandsNames.push(el.brand));
        
       })
