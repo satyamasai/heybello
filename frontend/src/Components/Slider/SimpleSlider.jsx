@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import coverimage from "../../Photo/cover-image1.jpg";
+import { Img } from "@chakra-ui/react";
 let tempCarouselData = [
   coverimage,
   "https://images-static.nykaa.com/uploads/90e30c9e-db98-455b-89e8-5eefaba601d0.jpg",
@@ -25,7 +26,7 @@ export default function SimpleSlider() {
     <Slider className="slider" {...settings}>
       {tempCarouselData.map((imageUrl) => (
         <div className="carouselCard">
-          <img  src={imageUrl} alt="img" />
+          <Img height={{sm:"240px",md:'300px' ,base:'150px'} }   src={imageUrl} alt="img" />
         </div>
       ))}
     </Slider>
