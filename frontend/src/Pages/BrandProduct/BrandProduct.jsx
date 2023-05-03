@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./BrandProduct.css";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import BnbCard from "../../Components/Bnbcard/BnbCard";
 // import { RotatingSquare } from "react-loader-spinner";

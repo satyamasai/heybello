@@ -19,7 +19,7 @@ const UpperBorder = () => {
   <Box  fontSize={{sm:'12' ,md:"18"}} border={'1px solid'} w={'95%'} justifyContent={'space-around'} display={{base:"none",sm:"flex" , md:"flex"}}>
   {
     product_type.map((pt)=>(
-        <a style={{textTransform:'capitalize'}}  href="#">{pt}</a>
+        <a href={`/product/${pt}`} style={{textTransform:'capitalize'}}  >{pt}</a>
         ))
         
     }
