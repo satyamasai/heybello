@@ -39,37 +39,39 @@ const Trending = () => {
     getTrendingProduct();
   }, []);
 
-  
-
-
   // ----###-----handleSingleProduct-----###----------
   const handleSingleProduct = (single_product) => {
     navigate(`/singleproduct/${single_product.id}`);
     localStorage.setItem("single_product", JSON.stringify(single_product));
   };
 
+  // ----------##handle add to cart----##------------//
+  const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  const toast = useToast();
+  const handleAddToCart = (cartproduct) => {
+    cartItems.push(cartproduct);
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
 
-    // ----------##handle add to cart----##------------//
-    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    const toast = useToast();
-    const handleAddToCart = (cartproduct) => {
-      cartItems.push(cartproduct);
-      localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  
-      toast({
-        title: "Product added.",
-        description: "We've added your product to the cart.",
-        status: "success",
-        duration: 2000,
-        isClosable: true,
-      });
-    };
+    toast({
+      title: "Product added.",
+      description: "We've added your product to the cart.",
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+    });
+  };
   return (
     <div className="trending">
       <Flex gap={"4"} flexWrap={"wrap"}>
         {!loader &&
           trendingProducts.map((product, index) => (
             <div key={index} className="t_product_card">
+              <div className="sale_tag">
+                <img
+                  src="https://www.freeiconspng.com/thumbs/sale-tag-png/sale-price-tag-png-18.png"
+                  alt="sale tag"
+                />
+              </div>{" "}
               <img
                 onClick={() => handleSingleProduct(product)}
                 src={product.api_featured_image}
@@ -82,13 +84,17 @@ const Trending = () => {
                 <div>
                   {" "}
                   <span>
-                    <strike>₹{Math.floor(product.price) + 10}</strike>{" "}
+                    <strike>
+                      ₹
+                      {Math.floor(product.price) +
+                        (Math.floor(product.price) * 20) / 100}
+                    </strike>{" "}
                   </span>{" "}
                   ₹ <span style={{ color: "black" }}>{product.price}</span>
                 </div>
                 <div>
                   <Button
-                  onClick={()=>handleAddToCart(product)}
+                    onClick={() => handleAddToCart(product)}
                     leftIcon={<MdAddShoppingCart />}
                     colorScheme="pink"
                     variant="solid"
