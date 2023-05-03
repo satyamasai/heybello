@@ -6,3 +6,17 @@
 background-repeat: no-repeat;
 background-size: 100%;
 }
+
+.subpage_select{
+    text-transform: capitalize;
+    /* background-color: green; */
+
+}
+.subpage_select>option{
+    background-color: rgb(223, 193, 138);
+    
+}
+.subpage_option{
+    background: rgb(252, 203, 157) !important;
+    color: white;
+}

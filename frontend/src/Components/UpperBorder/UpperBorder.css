@@ -7,4 +7,28 @@
     align-items: center;
     color:black;
     /* text-transform: capitalize; */
+    overflow: hidden;
+}
+
+
+.product_types{
+    display: flex;
+    animation: marquee 30s linear infinite;
+    animation-play-state: running;
+    overflow: hidden;
+}
+@keyframes marquee {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+    110% {
+        transform: translateX(-100%);
+      }
+  }
+
+  .product_types:hover{
+    animation-play-state: paused;
 }

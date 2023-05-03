@@ -50,9 +50,11 @@ export default function BnbCard({ item, handleViewSingle }) {
 
   return (
     <Box
+    width={'auto'}
+    border={'1px solid black'}
       className="bnbcard"
       boxSizing="border-box"
-      h="420px"
+      h="450px"
       m="5"
       p="2"
       color={"goldenrod"}

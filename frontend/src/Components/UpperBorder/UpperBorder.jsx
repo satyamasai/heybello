@@ -12,14 +12,18 @@ let product_type = [
   "lipstick",
   "mascara",
   "nail_polish",
+ 
+ 
 ];
 const UpperBorder = () => {
   return <div className="upper_border">
   
-  <Box  fontSize={{sm:'12' ,md:"18"}} border={'1px solid'} w={'95%'} justifyContent={'space-around'} display={{base:"none",sm:"flex" , md:"flex"}}>
+  <Box width={'300%'} className="product_types" fontSize={{sm:'12' ,md:"18"}} border={'1px solid red'}  justifyContent={'space-around'} display={{base:"none",sm:"flex" , md:"flex"}}>
   {
     product_type.map((pt)=>(
-        <a href={`/product/${pt}`} style={{textTransform:'capitalize'}}  >{pt}</a>
+      <div>
+      <a href={`/product/${pt}`} style={{textTransform:'capitalize'}}  >{pt}</a>
+      </div>
         ))
         
     }

@@ -39,6 +39,9 @@ const Trending = () => {
     getTrendingProduct();
   }, []);
 
+  
+
+
   // ----###-----handleSingleProduct-----###----------
   const handleSingleProduct = (single_product) => {
     navigate(`/singleproduct/${single_product.id}`);
