@@ -26,10 +26,9 @@ const ProductSubpage = () => {
 
   const getAllBrandsName = () => {
     axios
-      .get(`http://localhost:8080/getproductsbytype/${productname}`)
+      .get(`https://hbserver-ous1.onrender.com/getproductsbytype/${productname}`)
       .then((res) => {
         setAllBrands(res.data);
-        console.log(allBrand, "an");
 
         allBrand.map((el) => allBrandsNames.push(el.brand));
       })
@@ -57,7 +56,7 @@ const ProductSubpage = () => {
   // -------#######-----------#########_--------------------------////
   const getProductsByCategory = () => {
     axios
-      .get(`http://localhost:8080/getproductsbytype/${productname}`)
+      .get(`https://hbserver-ous1.onrender.com/getproductsbytype/${productname}`)
       .then((res) => {
         // console.log(res.data);
         setProducts(res.data);
