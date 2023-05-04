@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const Authentication = (req, res, next) => {
-    console.log(req.headers,"headders")
+    // console.log(req.headers,"headders")
   if (!req.headers.authorization) {
     res.send({ msg: "submit the token first..." });
     return;

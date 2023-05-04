@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Cart.css";
 import {
   Drawer,
@@ -14,13 +14,40 @@ import {
   Box,
   Flex,
   Select,
+  useSliderStyles,
 } from "@chakra-ui/react";
 import { FaCartPlus } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import axios  from 'axios';
 export default function Cart() {
+  const [cartItems,setCartItems] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
-  const cartItems = JSON.parse(localStorage.getItem("cartItems"));
+  const hbToken= JSON.parse(localStorage.getItem("hbToken"))
+ 
+ //----## getting cart items of user----///####-----
+ 
+useEffect(()=>{
+  const getcartItems =()=>{
+    axios.get('http://localhost:8080/getcartitems',{
+      headers: {
+        Authorization: `Bearer ${hbToken}`,
+      },
+    })
+    .then((res)=>{
+      console.log(res)
+      setCartItems(res.data.cart)
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+
+}
+getcartItems()
+
+},[])
+
+
   return (
     <>
       <Button m={"5px"} ref={btnRef} onClick={onOpen}>
@@ -41,7 +68,7 @@ export default function Cart() {
           <DrawerHeader>Cart</DrawerHeader>
 
           <DrawerBody className="drawer_body">
-            {cartItems?.map((item) => (
+            {cartItems.map((item) => (
               <Box
                 mt={'4px'}
                 boxSizing="border-box"
@@ -51,7 +78,7 @@ export default function Cart() {
               >
                 <Flex h={"70%"} border={""}>
                   <img
-                    src={item.api_featured_image}
+                    src={item.product_details.api_featured_image}
                     alt="product_image"
                     width={"100px"}
                     height={"80px"}
@@ -64,7 +91,7 @@ export default function Cart() {
                     h={"75%"}
                     border={""}
                   >
-                    {item.name}-{item.brand}- {item.product_type}
+                    {item.product_details.name}-{item.product_details.brand}- {item.product_details.product_type}
                   </Flex>
                 </Flex>
                 <Flex
