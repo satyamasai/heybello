@@ -25,7 +25,7 @@ const Trending = () => {
     setLoader(true);
     axios
       .get(
-        "http://makeup-api.herokuapp.com/api/v1/products.json?rating_greater_than=4.5"
+        "http://localhost:8080/getproducts"
       )
       .then((res) => {
         console.log(res.data);

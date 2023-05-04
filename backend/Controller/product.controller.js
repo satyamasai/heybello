@@ -27,6 +27,16 @@ const addProduct = async (req, res) => {
 
 // ----api for gettong products
 
+const getProducts = async (req, res) => {
+  try {
+    const products = await ProductModel.find({"rating": {$gte:5}});
+    res.send(products);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 module.exports = {
   addProduct,
+  getProducts,
 };
