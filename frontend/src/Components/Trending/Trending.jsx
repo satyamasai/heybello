@@ -52,9 +52,9 @@ const Trending = () => {
   // const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
   const toast = useToast();
   const handleAddToCart = (cartproduct) => {
-    cartproduct.price=Number(cartproduct.price)
+    cartproduct.price = Number(cartproduct.price);
     console.log(hbToken, "hbToken");
-    console.log(cartproduct,"cp")
+    console.log(cartproduct, "cp");
     if (!hbToken) {
       toast({
         title: "LOGGING ERROR ",
@@ -62,8 +62,8 @@ const Trending = () => {
         status: "error",
         duration: 2000,
         isClosable: true,
-      })
-      return (navigate("/login"))
+      });
+      return navigate("/login");
     }
     // cartItems.push(cartproduct);
     // localStorage.setItem("cartItems", JSON.stringify(cartItems));
