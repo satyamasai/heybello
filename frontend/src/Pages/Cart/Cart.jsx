@@ -18,35 +18,50 @@ import {
 } from "@chakra-ui/react";
 import { FaCartPlus } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import axios  from 'axios';
+import axios from "axios";
 export default function Cart() {
-  const [cartItems,setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
-  const hbToken= JSON.parse(localStorage.getItem("hbToken"))
- 
- //----## getting cart items of user----///####-----
- 
-useEffect(()=>{
-  const getcartItems =()=>{
-    axios.get('http://localhost:8080/getcartitems',{
-      headers: {
-        Authorization: `Bearer ${hbToken}`,
-      },
-    })
-    .then((res)=>{
-      console.log(res)
-      setCartItems(res.data.cart)
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
+  const hbToken = JSON.parse(localStorage.getItem("hbToken"));
 
-}
-getcartItems()
+  //----## getting cart items of user----///####-----
 
-},[])
+  useEffect(() => {
+    const getcartItems = () => {
+      axios
+        .get("http://localhost:8080/getcartitems", {
+          headers: {
+            Authorization: `Bearer ${hbToken}`,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          setCartItems(res.data.cart);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    getcartItems();
+  }, []);
 
+  // -----handle delete---####////
+
+  const handleDeleteItem = (id) => {
+    axios
+      .delete(`http://localhost:8080/deleteitem/${id}`, {
+        headers: {
+          Authorization: `Bearer ${hbToken}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <>
@@ -55,12 +70,10 @@ getcartItems()
       </Button>
 
       <Drawer
-       
         isOpen={isOpen}
         placement="right"
         onClose={onClose}
         finalFocusRef={btnRef}
-      
       >
         <DrawerOverlay />
         <DrawerContent className="drawer_content">
@@ -70,7 +83,7 @@ getcartItems()
           <DrawerBody className="drawer_body">
             {cartItems.map((item) => (
               <Box
-                mt={'4px'}
+                mt={"4px"}
                 boxSizing="border-box"
                 w={"99%"}
                 border={"1px solid goldenrod"}
@@ -91,7 +104,8 @@ getcartItems()
                     h={"75%"}
                     border={""}
                   >
-                    {item.product_details.name}-{item.product_details.brand}- {item.product_details.product_type}
+                    {item.product_details.name}-{item.product_details.brand}-{" "}
+                    {item.product_details.product_type}
                   </Flex>
                 </Flex>
                 <Flex
@@ -117,9 +131,9 @@ getcartItems()
                       <option value="3">3</option>
                     </Select>{" "}
                   </Flex>
-                  <Box>$ {item.price}</Box>
+                  <Box>$ {item.product_details.price}</Box>
                   <Box>
-                    <MdDelete />
+                    <MdDelete onClick={() => handleDeleteItem(item.id)} />
                   </Box>
                 </Flex>
               </Box>

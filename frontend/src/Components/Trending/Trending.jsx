@@ -28,7 +28,7 @@ const Trending = () => {
         "http://makeup-api.herokuapp.com/api/v1/products.json?rating_greater_than=4.5"
       )
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         setTrendingProducts(res.data);
         setLoader(false);
       })

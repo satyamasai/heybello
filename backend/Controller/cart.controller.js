@@ -41,7 +41,7 @@ const getCartItems = async (req, res) => {
 
     if (!cart) {
       // if the cart is not found for the user
-      return
+      return;
       return res.status(404).json({ message: "Cart not found" });
     }
 
@@ -54,13 +54,20 @@ const getCartItems = async (req, res) => {
 
 // -----### ---delete item from cart ---api---###////
 
-const deleteItem=()=>{
-
-  
-}
-
+const deleteItem = async (req, res) => {
+  const { user_id } = req.body;
+  const { id } = req.params;
+  try {
+    await CartItemModel.findOneAndDelete({ user_id, id });
+    res.send({ msg: "Item deleted" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ msg: "something went wrong" });
+  }
+};
 
 module.exports = {
   addToCart,
   getCartItems,
+  deleteItem,
 };
