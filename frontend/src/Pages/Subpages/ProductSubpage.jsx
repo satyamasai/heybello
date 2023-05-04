@@ -18,7 +18,7 @@ const ProductSubpage = () => {
   const [loader, setLoader] = useState(true);
   // console.log(productname, "PT");
   const navigate = useNavigate();
-const [brand_name , setBrandName]= useState("")
+  const [brand_name, setBrandName] = useState("");
   const [allBrand, setAllBrands] = useState([]);
   let allBrandsNames = [];
 
@@ -26,15 +26,12 @@ const [brand_name , setBrandName]= useState("")
 
   const getAllBrandsName = () => {
     axios
-      .get(
-        `http://localhost:8080/getproductsbytype/${productname}`
-      )
+      .get(`http://localhost:8080/getproductsbytype/${productname}`)
       .then((res) => {
         setAllBrands(res.data);
         console.log(allBrand, "an");
-       
-        allBrand.map(async (el) => await allBrandsNames.push(el.brand));
-       
+
+        allBrand.map((el) => allBrandsNames.push(el.brand));
       })
       .catch((err) => {
         setLoader(false);
@@ -44,12 +41,10 @@ const [brand_name , setBrandName]= useState("")
 
   // --------if brand name
 
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams();
   // if(brand_name){
   //   setSearchParams(brand_name)
   // }
-
-
 
   // -----select - brand name only------------
   allBrand.map(async (el) => {
@@ -62,9 +57,7 @@ const [brand_name , setBrandName]= useState("")
   // -------#######-----------#########_--------------------------////
   const getProductsByCategory = () => {
     axios
-      .get(
-        `http://localhost:8080/getproductsbytype/${productname}`
-      )
+      .get(`http://localhost:8080/getproductsbytype/${productname}`)
       .then((res) => {
         // console.log(res.data);
         setProducts(res.data);
@@ -79,7 +72,7 @@ const [brand_name , setBrandName]= useState("")
   useEffect(() => {
     getProductsByCategory();
     getAllBrandsName();
-  }, [brand_name,searchParams.brand_name]);
+  }, []);
 
   // ------------------------handleViewSingle----------------------------
 
@@ -91,28 +84,34 @@ const [brand_name , setBrandName]= useState("")
 
   return (
     <div className="product_subpage">
-      <Box  alignItems={'center'}
-      display={'flex'}
-    
-      justifyContent={'center'}  h={"50px"} w={"100%"}>
-        <Select bg='orange.300'
-       
-        size={'md'}
-        m={'auto'}
-        w={'180px'}
-        outline={'none'}
-        borderColor='tomato'
-        color='white'
-        placeholder='Select By Brand!' className="subpage_select" onChange={(e)=>{
-          setBrandName(e.target.value)
-          let params={brand_name:e.target.value}
-          setLoader(true)
-           setSearchParams(params)
-        
-        }} >
-         
+      <Box
+        alignItems={"center"}
+        display={"flex"}
+        justifyContent={"center"}
+        h={"50px"}
+        w={"100%"}
+      >
+        <Select
+          bg="orange.300"
+          size={"md"}
+          m={"auto"}
+          w={"180px"}
+          outline={"none"}
+          borderColor="tomato"
+          color="white"
+          placeholder="Select By Brand!"
+          className="subpage_select"
+          onChange={(e) => {
+            setBrandName(e.target.value);
+            let params = { brand_name: e.target.value };
+            setLoader(true);
+            setSearchParams(params);
+          }}
+        >
           {allBrandsNames?.map((brands) => (
-            <option  className="subpage_option" value={brands}>{brands}</option>
+            <option className="subpage_option" value={brands}>
+              {brands}
+            </option>
           ))}
         </Select>
       </Box>

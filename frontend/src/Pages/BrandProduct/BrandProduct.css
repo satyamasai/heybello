@@ -18,11 +18,14 @@
 .bnbcard {
   width: 300px;
   /* border:1px solid goldenrod; */
-  border-radius: 50px;
+  border-radius: 10px;
   
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(6px);
   border: 1px solid rgba(255, 255, 255, 0.664);
   background: rgba(240, 193, 105, 0.719);
   box-shadow: 6px 6px #acacac, -2px -2px 16px #ffffff;
+}
+.bnbcard>img{
+  border-radius: 10px;
 }

@@ -59,7 +59,7 @@ const BrandProduct = () => {
   return (
     <div className="brandproduct">
       <Filter handleFilter={handleFilter} />
-      <SimpleGrid columns={{ sm: 1, base: 2, md: 4 }}>
+      <SimpleGrid columns={{ sm: 1, base: 1, md: 2,lg:3,xl:4 }}>
         {!loader &&
           products?.map((item) => (
             <BnbCard handleViewSingle={handleViewSingle} item={item} />
