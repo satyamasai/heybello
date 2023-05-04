@@ -30,7 +30,7 @@ export default function Cart() {
   useEffect(() => {
     const getcartItems = () => {
       axios
-        .get("http://localhost:8080/getcartitems", {
+        .get("https://hbserver-ous1.onrender.com/getcartitems", {
           headers: {
             Authorization: `Bearer ${hbToken}`,
           },
@@ -50,7 +50,7 @@ export default function Cart() {
 
   const handleDeleteItem = (id) => {
     axios
-      .delete(`http://localhost:8080/deleteitem/${id}`, {
+      .delete(`https://hbserver-ous1.onrender.com/deleteitem/${id}`, {
         headers: {
           Authorization: `Bearer ${hbToken}`,
         },

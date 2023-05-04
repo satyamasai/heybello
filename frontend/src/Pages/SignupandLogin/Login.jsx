@@ -31,7 +31,7 @@ const toast= useToast()
       let userLoginData = { email, password };
       setLogging(true)
       axios
-      .post("http://localhost:8080/login", userLoginData)
+      .post("https://hbserver-ous1.onrender.com/login", userLoginData)
       .then((res) => {
         console.log(res);
         localStorage.setItem("hbToken",JSON.stringify(res.data.token))

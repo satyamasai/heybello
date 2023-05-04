@@ -43,7 +43,7 @@ export default function Signup() {
       };
       console.log(userData);
       axios
-        .post("http://localhost:8080/signup", userData)
+        .post("https://hbserver-ous1.onrender.com/signup", userData)
         .then((res) => {
           setLoading(false);
           console.log("success user");

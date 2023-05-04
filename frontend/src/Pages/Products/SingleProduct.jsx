@@ -52,7 +52,7 @@ const SingleProduct = () => {
     // cartItems.push(cartproduct);
     // localStorage.setItem("cartItems", JSON.stringify(cartItems));
     axios
-      .post("http://localhost:8080/addtocart", cartproduct, {
+      .post("https://hbserver-ous1.onrender.com/addtocart", cartproduct, {
         headers: {
           Authorization: `Bearer ${hbToken}`,
         },

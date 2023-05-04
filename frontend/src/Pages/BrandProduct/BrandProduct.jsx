@@ -21,7 +21,7 @@ const BrandProduct = () => {
   const getBrandProducts = (brandname) => {
     setLoader(true);
     axios
-      .get(`http://localhost:8080/getproductsbybrand/${brandname}`)
+      .get(`https://hbserver-ous1.onrender.com/getproductsbybrand/${brandname}`)
       .then((res) => {
         console.log(res);
         setLoader(false);
