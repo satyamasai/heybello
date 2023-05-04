@@ -23,7 +23,7 @@ export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
-  const hbToken = JSON.parse(localStorage.getItem("hbToken"));
+  const hbToken = JSON.parse(localStorage.getItem("hbToken")) || null;
 
   //----## getting cart items of user----///####-----
 

@@ -18,15 +18,13 @@ const Trending = () => {
   const navigate = useNavigate();
   const skelatonNums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   //---##--hbkey-----##
-  const hbToken = JSON.parse(localStorage.getItem("hbToken"));
+  const hbToken = JSON.parse(localStorage.getItem("hbToken")) || null;
 
   // ------###----Get trendings------###---//
   const getTrendingProduct = () => {
     setLoader(true);
     axios
-      .get(
-        "http://localhost:8080/getproducts"
-      )
+      .get("http://localhost:8080/getproducts")
       .then((res) => {
         console.log(res.data);
         setTrendingProducts(res.data);

@@ -27,7 +27,7 @@ const [brand_name , setBrandName]= useState("")
   const getAllBrandsName = () => {
     axios
       .get(
-        `http://makeup-api.herokuapp.com/api/v1/products.json?product_type=${productname}`
+        `http://localhost:8080/getproductsbytype/${productname}`
       )
       .then((res) => {
         setAllBrands(res.data);

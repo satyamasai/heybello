@@ -29,7 +29,7 @@ const SingleProduct = () => {
   const navigate = useNavigate();
   const single_product =
     JSON.parse(localStorage.getItem("single_product")) || [];
-  const hbToken = JSON.parse(localStorage.getItem("hbToken"));
+  const hbToken = JSON.parse(localStorage.getItem("hbToken")) || null;
 
   //   h--------------handle ADDED KART----------------
 
