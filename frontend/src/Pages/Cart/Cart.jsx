@@ -36,11 +36,11 @@ export default function Cart() {
       
       >
         <DrawerOverlay />
-        <DrawerContent>
+        <DrawerContent className="drawer_content">
           <DrawerCloseButton />
           <DrawerHeader>Cart</DrawerHeader>
 
-          <DrawerBody>
+          <DrawerBody className="drawer_body">
             {cartItems?.map((item) => (
               <Box
                 mt={'4px'}

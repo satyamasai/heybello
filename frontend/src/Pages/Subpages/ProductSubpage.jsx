@@ -93,6 +93,7 @@ console.log(brand_name,"bnnnnnn")
     <div className="product_subpage">
       <Box  alignItems={'center'}
       display={'flex'}
+    
       justifyContent={'center'}  h={"50px"} w={"100%"}>
         <Select bg='orange.300'
        

@@ -36,75 +36,65 @@ let popularbrands = [
     brand_png:
       "https://cdn.shopify.com/s/files/1/1016/3243/files/BooshLogo_2019-02-01_360x.png?v=1613727190",
   },
- 
+
   {
-    brand_name:  "burt's bees",
+    brand_name: "burt's bees",
     brand_png:
       "https://www.thecloroxcompany.com/wp-content/uploads/2018/05/Burts-Bees.png",
   },
- 
+
   {
-    brand_name:   "butter london",
+    brand_name: "butter london",
     brand_png:
       "https://butterlondon.co.uk/cdn/shop/files/BL_LARGE_HIRES_LOGO_1200x.png?v=1637599222",
   },
 
-  
   {
-    brand_name:  "cargo cosmetics",
+    brand_name: "cargo cosmetics",
     brand_png:
       "https://logo-all.ru/uploads/posts/2022-02/0_cargo_cosmetics_logo.jpg",
   },
- 
+
   {
-    brand_name:  "china glaze",
+    brand_name: "china glaze",
     brand_png:
       "https://hqsalonspa.ca/wp-content/uploads/2016/11/HQ-SALON-SPA-CHINA-GLAZE-LOGO.jpg",
   },
 
   {
-    brand_name:    "clinique",
+    brand_name: "clinique",
     brand_png:
       "https://1000logos.net/wp-content/uploads/2020/04/Logo-Clinique.jpeg",
   },
- 
-  
+
   {
-    brand_name:   "covergirl",
+    brand_name: "covergirl",
     brand_png:
       "https://hips.hearstapps.com/hmg-prod/images/screen-shot-2017-10-10-at-12-17-05-pm-1507652241.png?crop=0.766xw:0.857xh;0.0865xw,0.0430xh&resize=640:*",
   },
   {
-    brand_name:    "dalish",
+    brand_name: "dalish",
     brand_png:
       "https://cdn.shopify.com/s/files/1/0077/5340/0356/files/da_lish_NEW_logo_small_205x.png?v=1613575755",
   },
 
-  
   {
-    brand_name:    "dior",
+    brand_name: "dior",
     brand_png:
       "https://i.pinimg.com/originals/63/f8/a2/63f8a246bb50fcabc4eaa762f26d27e1.jpg",
   },
 
-  
- 
   {
-    brand_name:    "e.l.f.",
+    brand_name: "e.l.f.",
     brand_png:
       "https://seeklogo.com/images/E/elf-cosmetics-logo-5C73482AB6-seeklogo.com.png",
   },
 
-
- 
   {
-    brand_name:   "l'oreal",
+    brand_name: "l'oreal",
     brand_png:
       "https://1000logos.net/wp-content/uploads/2017/03/Font-LOreal-Logo.jpg",
-  },  
-
-
-
+  },
 ];
 
 const PopularBrands = () => {
@@ -115,28 +105,36 @@ const PopularBrands = () => {
 
   return (
     <div className="popularbrands">
-    <Heading  >
-    Top Brands
-    </Heading>
-      <Flex p={'5px'} gap={'10px'} className="popular_flex" m="auto" wrap="wrap">
+      <Heading>Top Brands</Heading>
+      <Flex
+        p={"10px"}
+        gap={"20px"}
+        className="popular_flex"
+        
+        wrap="wrap"
+      >
         {popularbrands.map((brand) => (
           <Box
-          borderRadius={'10px'}
+            borderRadius={"10px"}
             cursor="pointer"
             onClick={() => handleBrandPage(brand.brand_name)}
-            w={'180px'}
+            w={"180px"}
             m={5}
-            h={'150px'}
-            margin={'auto'}
-            border="1px"
+            h={"120px"}
+            margin={"auto"}
+            p={'5px'}
             borderColor="goldenrod"
             color="goldenrod"
-            display={'flex'}
-          
-            alignItems={'center'}
+            display={"flex"}
+            alignItems={"center"}
           >
-           <Image w={'100%'} borderRadius={'10px'}
-           h={'100%'} src={brand.brand_png} alt="brand_logo" />
+            <Image
+              w={"100%"}
+              borderRadius={"10px"}
+              h={"100%"}
+              src={brand.brand_png}
+              alt="brand_logo"
+            />
           </Box>
         ))}
       </Flex>

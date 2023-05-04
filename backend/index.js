@@ -4,6 +4,7 @@ const app = express();
 require("dotenv").config();
 const cors = require("cors");
 const { userRouter } = require("./Routes/user.routes");
+const { cartRouter } = require("./Routes/cart.routes");
 app.use(express.json());
 app.use(cors());
 
@@ -16,6 +17,8 @@ app.get("/", (req, res) => {
 app.use("/",userRouter);
 
 // ##--------------##--------------------##
+
+app.use('/',cartRouter)
 
 // ----Listening ---------
 app.listen(process.env.PORT, async () => {

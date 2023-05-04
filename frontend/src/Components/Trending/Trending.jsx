@@ -17,6 +17,9 @@ const Trending = () => {
   const [loader, setLoader] = useState(true);
   const navigate = useNavigate();
   const skelatonNums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  //---##--hbkey-----##
+  const hbToken = JSON.parse(localStorage.getItem("hbToken"));
+
   // ------###----Get trendings------###---//
   const getTrendingProduct = () => {
     setLoader(true);
@@ -25,7 +28,7 @@ const Trending = () => {
         "http://makeup-api.herokuapp.com/api/v1/products.json?rating_greater_than=4.5"
       )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setTrendingProducts(res.data);
         setLoader(false);
       })
@@ -46,20 +49,52 @@ const Trending = () => {
   };
 
   // ----------##handle add to cart----##------------//
-  const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  // const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
   const toast = useToast();
   const handleAddToCart = (cartproduct) => {
-    cartItems.push(cartproduct);
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-
-    toast({
-      title: "Product added.",
-      description: "We've added your product to the cart.",
-      status: "success",
-      duration: 2000,
-      isClosable: true,
-    });
+    cartproduct.price=Number(cartproduct.price)
+    console.log(hbToken, "hbToken");
+    console.log(cartproduct,"cp")
+    if (!hbToken) {
+      toast({
+        title: "LOGGING ERROR ",
+        description: "Login first to add product into cart..",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+      })
+      return (navigate("/login"))
+    }
+    // cartItems.push(cartproduct);
+    // localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    axios
+      .post("http://localhost:8080/addtocart", cartproduct, {
+        headers: {
+          Authorization: `Bearer ${hbToken}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        toast({
+          title: "Product added.",
+          description: "We've added your product to the cart.",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        toast({
+          title: "Check again..",
+          description: "Something went wrong",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+        });
+      });
   };
+  // -------###------####--------//
   return (
     <div className="trending">
       <Flex gap={"4"} flexWrap={"wrap"}>
