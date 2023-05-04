@@ -25,7 +25,7 @@ const navigate = useNavigate()
 const toast= useToast()
   const handleLogin = () => {
 
-    let hbToken=localStorage.getItem("hbToken") || null;
+    let hbToken=localStorage.getItem("hbToken") ;
     if(hbToken) navigate("/")
     if (email && password) {
       let userLoginData = { email, password };

@@ -51,7 +51,7 @@ const ProductSubpage = () => {
       await allBrandsNames.push(el.brand);
     }
   });
-  console.log(allBrandsNames, "an");
+  // console.log(allBrandsNames, "an");
 
   // -------#######-----------#########_--------------------------////
   const getProductsByCategory = () => {

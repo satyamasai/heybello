@@ -23,12 +23,13 @@ export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
-  const hbToken = JSON.parse(localStorage.getItem("hbToken")) || null;
 
   //----## getting cart items of user----///####-----
 
   useEffect(() => {
     const getcartItems = () => {
+      const hbToken = localStorage.getItem("hbToken") ;
+
       axios
         .get("https://hbserver-ous1.onrender.com/getcartitems", {
           headers: {
@@ -49,6 +50,8 @@ export default function Cart() {
   // -----handle delete---####////
 
   const handleDeleteItem = (id) => {
+    const hbToken = JSON.parse(localStorage.getItem("hbToken")) || null;
+
     axios
       .delete(`https://hbserver-ous1.onrender.com/deleteitem/${id}`, {
         headers: {

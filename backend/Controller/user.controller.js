@@ -15,7 +15,7 @@ const userSignup = async (req, res) => {
         status: "Exist",
       });
     } else {
-      bcrypt.hash(password,4,async(err, hash_password) => {
+      bcrypt.hash(password, 4, async (err, hash_password) => {
         if (err) {
           res.send({ message: "Something went wrong", status: "Failed" });
         } else {
@@ -48,7 +48,9 @@ const userLogin = async (req, res) => {
     const user_id = user._id;
     bcrypt.compare(password, hashed_password, async (err, result) => {
       if (err) {
-        res.send({ message: "Something went wrong", status: "Error" });
+        res
+          .status(500)
+          .send({ message: "Something went wrong", status: "Error" });
       } else {
         if (result) {
           let token = jwt.sign({ user_id }, process.env.SECRET_KEY);
@@ -58,12 +60,12 @@ const userLogin = async (req, res) => {
             id: user._id,
           });
         } else {
-          res.send({ message: "Login failed", status: "Failed" });
+          res.status(500).send({ message: "Login failed", status: "Failed" });
         }
       }
     });
   } else {
-    res.send({
+    res.status(500).send({
       message: "User Does not exist, please login with correct credentials..",
       status: "Failed",
     });
@@ -73,5 +75,5 @@ const userLogin = async (req, res) => {
 // ##---------------------exports--------
 module.exports = {
   userSignup,
-  userLogin
+  userLogin,
 };

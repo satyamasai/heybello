@@ -5,7 +5,7 @@ import {
   Box,
   Button,
   Flex,
-  Skeleton,
+  
   SkeletonCircle,
   SkeletonText,
   useToast,
@@ -18,7 +18,6 @@ const Trending = () => {
   const navigate = useNavigate();
   const skelatonNums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   //---##--hbkey-----##
-  const hbToken = JSON.parse(localStorage.getItem("hbToken")) || null;
 
   // ------###----Get trendings------###---//
   const getTrendingProduct = () => {
@@ -50,8 +49,10 @@ const Trending = () => {
   // const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
   const toast = useToast();
   const handleAddToCart = (cartproduct) => {
+    const hbToken = JSON.parse(localStorage.getItem("hbToken"))  ;
+
     cartproduct.price = Number(cartproduct.price);
-    console.log(hbToken, "hbToken");
+    // console.log(hbToken, "hbToken");
     console.log(cartproduct, "cp");
     if (!hbToken) {
       toast({
