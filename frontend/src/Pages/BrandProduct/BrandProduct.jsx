@@ -4,7 +4,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import BnbCard from "../../Components/Bnbcard/BnbCard";
 // import { RotatingSquare } from "react-loader-spinner";
-import { Box, SimpleGrid, SkeletonCircle, SkeletonText } from "@chakra-ui/react";
+import {
+  Box,
+  SimpleGrid,
+  SkeletonCircle,
+  SkeletonText,
+} from "@chakra-ui/react";
 import Filter from "../../Components/Filter/Filter";
 
 const BrandProduct = () => {
@@ -12,13 +17,11 @@ const BrandProduct = () => {
   const [products, setProducts] = useState([]);
   const [loader, setLoader] = useState(false);
   const { brandname } = useParams();
-  const SkeletonNums=[1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9]
+  const SkeletonNums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   const getBrandProducts = (brandname) => {
     setLoader(true);
     axios
-      .get(
-        `http://makeup-api.herokuapp.com/api/v1/products.json?brand=${brandname}`
-      )
+      .get(`http://localhost:8080/getproductsbybrand/${brandname}`)
       .then((res) => {
         console.log(res);
         setLoader(false);
@@ -56,24 +59,31 @@ const BrandProduct = () => {
   return (
     <div className="brandproduct">
       <Filter handleFilter={handleFilter} />
-      <SimpleGrid  columns={{sm:1,base:2,md:4}}>
-      {!loader && (
-        products?.map((item) => (
-          <BnbCard handleViewSingle={handleViewSingle} item={item} />
-          ))
-          ) }
-          </SimpleGrid>
+      <SimpleGrid columns={{ sm: 1, base: 2, md: 4 }}>
+        {!loader &&
+          products?.map((item) => (
+            <BnbCard handleViewSingle={handleViewSingle} item={item} />
+          ))}
+      </SimpleGrid>
 
-  {/** -----##  Skeleton effect ##------- */}
-  {loader && (
-    SkeletonNums?.map((item ,index) => (
-      <Box key={index} border={''} m={3} w={300} h={360} padding='6' boxShadow='lg' bg='grey.300' borderRadius={12}>
-      <SkeletonCircle size='10' />
-      <SkeletonText mt='4' noOfLines={4} spacing='4' skeletonHeight='2' />
-    </Box>
-    ))
-  ) }
-
+      {/** -----##  Skeleton effect ##------- */}
+      {loader &&
+        SkeletonNums?.map((item, index) => (
+          <Box
+            key={index}
+            border={""}
+            m={3}
+            w={300}
+            h={360}
+            padding="6"
+            boxShadow="lg"
+            bg="grey.300"
+            borderRadius={12}
+          >
+            <SkeletonCircle size="10" />
+            <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
+          </Box>
+        ))}
     </div>
   );
 };

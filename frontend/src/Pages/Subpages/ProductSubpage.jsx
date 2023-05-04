@@ -23,7 +23,7 @@ const [brand_name , setBrandName]= useState("")
   let allBrandsNames = [];
 
   // ----### ---get all brands name ---####----//
-console.log(brand_name,"bnnnnnn")
+
   const getAllBrandsName = () => {
     axios
       .get(

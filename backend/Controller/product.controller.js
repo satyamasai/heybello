@@ -28,7 +28,9 @@ const addProduct = async (req, res) => {
 // ----api for gettong products
 
 const getProducts = async (req, res) => {
+    // const {brand_name}= req.body
   try {
+
     const products = await ProductModel.find({"rating": {$gte:5}});
     res.send(products);
   } catch (err) {
@@ -36,7 +38,25 @@ const getProducts = async (req, res) => {
   }
 };
 
+// ----------##-- get products by brand----//
+
+const getProductsByBrand = async (req, res) => {
+    const {brand}= req.params
+  try {
+console.log(brand,"brand anmemmememem")
+    const products = await ProductModel.find({"brand": brand});
+    res.send(products);
+    // console.log(products)
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+
+
+
 module.exports = {
   addProduct,
   getProducts,
+  getProductsByBrand
 };
