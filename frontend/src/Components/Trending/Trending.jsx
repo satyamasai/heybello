@@ -97,7 +97,7 @@ const Trending = () => {
   // -------###------####--------//
   return (
     <div className="trending">
-      <Flex gap={"4"} flexWrap={"wrap"}>
+      <div className="trending_grid" >
         {!loader &&
           trendingProducts.map((product, index) => (
             <div key={index} className="t_product_card">
@@ -129,11 +129,14 @@ const Trending = () => {
                 </div>
                 <div>
                   <Button
+
+                  className="trending_cart_btn"
                     onClick={() => handleAddToCart(product)}
                     leftIcon={<MdAddShoppingCart />}
                     colorScheme="pink"
                     variant="solid"
-                    size={"sm"}
+                    size={{sm:"xsm",md:"md"}}
+
                   >
                     Add to cart
                   </Button>
@@ -163,7 +166,7 @@ const Trending = () => {
               />
             </Box>
           ))}
-      </Flex>
+      </div>
     </div>
   );
 };
