@@ -22,8 +22,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { MdLocalShipping } from "react-icons/md";
 import { useToast } from "@chakra-ui/react";
 import axios from "axios";
+import {ADD_TO_CART} from "../../Utils/url.js"
 const SingleProduct = () => {
-  const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  // const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
   const toast = useToast();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ const SingleProduct = () => {
     // cartItems.push(cartproduct);
     // localStorage.setItem("cartItems", JSON.stringify(cartItems));
     axios
-      .post("https://hbserver-ous1.onrender.com/addtocart", cartproduct, {
+      .post(`${ADD_TO_CART}`, cartproduct, {
         headers: {
           Authorization: `Bearer ${hbToken}`,
         },

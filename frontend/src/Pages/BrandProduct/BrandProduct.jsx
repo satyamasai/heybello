@@ -12,12 +12,12 @@ import {
   SkeletonText,
 } from "@chakra-ui/react";
 import Filter from "../../Components/Filter/Filter";
-import { PORT, SPECIFIC_BRAND_API } from "../../Utils/url";
+import {  SPECIFIC_BRAND_API } from "../../Utils/url";
 
 
 
 const BrandProduct = () => {
-  console.log(PORT,"SL")
+  
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [loader, setLoader] = useState(false);

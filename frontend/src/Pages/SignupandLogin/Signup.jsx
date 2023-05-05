@@ -19,6 +19,7 @@ import { Link as ReactRouter, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import axios from "axios";
+import { USER_SIGNUP } from "../../Utils/url";
 
 
 export default function Signup() {
@@ -43,7 +44,7 @@ export default function Signup() {
       };
       console.log(userData);
       axios
-        .post("https://hbserver-ous1.onrender.com/signup", userData)
+        .post(`${USER_SIGNUP}`, userData)
         .then((res) => {
           setLoading(false);
           console.log("success user");

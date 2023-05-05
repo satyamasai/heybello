@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { FaCartPlus } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import {GET_ALL_CART_ITEMS} from "../../Utils/url.js"
+import { GET_ALL_CART_ITEMS ,DELETE_CART_ITEM} from "../../Utils/url.js";
 import axios from "axios";
 export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
@@ -26,11 +26,10 @@ export default function Cart() {
   const btnRef = React.useRef();
 
   //----## getting cart items of user----///####-----
-  const hbToken = localStorage.getItem("hbToken");
+  const hbToken = JSON.parse(localStorage.getItem("hbToken"));
 
   useEffect(() => {
-    const getcartItems = async() => {
-
+    const getcartItems = async () => {
       axios
         .get(`${GET_ALL_CART_ITEMS}`, {
           headers: {
@@ -54,7 +53,7 @@ export default function Cart() {
     const hbToken = JSON.parse(localStorage.getItem("hbToken")) || null;
 
     axios
-      .delete(`https://hbserver-ous1.onrender.com/deleteitem/${id}`, {
+      .delete(`${DELETE_CART_ITEM}/${id}`, {
         headers: {
           Authorization: `Bearer ${hbToken}`,
         },
@@ -85,8 +84,9 @@ export default function Cart() {
           <DrawerHeader>Cart</DrawerHeader>
 
           <DrawerBody className="drawer_body">
-            {cartItems.map((item) => (
+            {cartItems.map((item,index) => (
               <Box
+              key={index}
                 mt={"4px"}
                 boxSizing="border-box"
                 w={"99%"}

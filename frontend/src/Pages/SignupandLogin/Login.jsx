@@ -16,6 +16,7 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { USER_LOGIN } from './../../Utils/url';
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -31,7 +32,7 @@ const toast= useToast()
       let userLoginData = { email, password };
       setLogging(true)
       axios
-      .post("https://hbserver-ous1.onrender.com/login", userLoginData)
+      .post(`${USER_LOGIN}`, userLoginData)
       .then((res) => {
         console.log(res);
         localStorage.setItem("hbToken",JSON.stringify(res.data.token))
