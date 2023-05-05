@@ -1,0 +1,24 @@
+export const PORT = 'http://localhost:8080'
+
+export const SPECIFIC_BRAND_API = `${PORT}/getproductsbybrand`;
+export const ADD_TO_CART=`${PORT}/addtocart`
+export const GET_ALL_CART_ITEMS=`${PORT}/getcartitems`
+export const DELETE_CART_ITEM=`${PORT}/deleteitem`
+export const GET_ALL_PRODUCTS = `${PORT}/getallproducts`;
+export const GET_PRODUCTS_BY_BRAND = `${PORT}/getproductsbybrand`;
+export const GET_PRODUCTS_BY_TYPE = `${PORT}/getproductsbyType`;
+export const USER_LOGIN = `${PORT}/login`;
+export const USER_SIGNUP = `${PORT}/signup`;
+export const SEARCH_DATA = `${PORT}/products`;
+export const USER_PROFILE = `${PORT}/profile`;
+export const WISHLIST_DATA = `${PORT}/wishlist`;
+export const ADD_NEW_ADDRESS = `${PORT}/address`;
+export const GET_ALL_KIDS_PRODUCTS = `${PORT}/getAllProductsKids`;
+export const GET_ALL_MENS_PRODUCTS = `${PORT}/getAllProductsMens`;
+export const GET_PRODUCT_DETAILS = `${PORT}/getAllProductsDetails`;
+export const GET_ALL_FILTER_PRODUCTS = `${PORT}/getAllFilterProducts`;
+export const GET_ALL_WOMENS_PRODUCTS = `${PORT}/getAllProductsWomens`;
+export const GET_PRODUCT_SORT_BY_PRICE = `${PORT}/getAllProductsSortByPrice`;
+export const GET_PRODUCT_SORT_BY_RATING = `${PORT}/getAllProductsSortByRating`;
+export const GET_ALL_ELECTRONICS_PRODUCTS = `${PORT}/getAllProductsElectronics`;
+export const GET_PRODUCT_SORT_BY_DISCOUNT = `${PORT}/getAllProductsSortByDiscount`;

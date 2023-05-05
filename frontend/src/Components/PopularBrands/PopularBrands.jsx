@@ -113,8 +113,9 @@ const PopularBrands = () => {
         
         wrap="wrap"
       >
-        {popularbrands.map((brand) => (
+        {popularbrands.map((brand,index) => (
           <Box
+          key={index}
             borderRadius={"10px"}
             cursor="pointer"
             onClick={() => handleBrandPage(brand.brand_name)}

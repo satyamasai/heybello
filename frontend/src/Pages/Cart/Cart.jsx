@@ -18,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { FaCartPlus } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import {GET_ALL_CART_ITEMS} from "../../Utils/url.js"
 import axios from "axios";
 export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
@@ -25,13 +26,13 @@ export default function Cart() {
   const btnRef = React.useRef();
 
   //----## getting cart items of user----///####-----
+  const hbToken = localStorage.getItem("hbToken");
 
   useEffect(() => {
-    const getcartItems = () => {
-      const hbToken = localStorage.getItem("hbToken") ;
+    const getcartItems = async() => {
 
       axios
-        .get("https://hbserver-ous1.onrender.com/getcartitems", {
+        .get(`${GET_ALL_CART_ITEMS}`, {
           headers: {
             Authorization: `Bearer ${hbToken}`,
           },

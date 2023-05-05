@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import "./BrandProduct.css";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
@@ -11,8 +12,12 @@ import {
   SkeletonText,
 } from "@chakra-ui/react";
 import Filter from "../../Components/Filter/Filter";
+import { PORT, SPECIFIC_BRAND_API } from "../../Utils/url";
+
+
 
 const BrandProduct = () => {
+  console.log(PORT,"SL")
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [loader, setLoader] = useState(false);
@@ -21,7 +26,7 @@ const BrandProduct = () => {
   const getBrandProducts = (brandname) => {
     setLoader(true);
     axios
-      .get(`https://hbserver-ous1.onrender.com/getproductsbybrand/${brandname}`)
+      .get(`${SPECIFIC_BRAND_API}/${brandname}`)
       .then((res) => {
         console.log(res);
         setLoader(false);
@@ -61,8 +66,8 @@ const BrandProduct = () => {
       <Filter handleFilter={handleFilter} />
       <SimpleGrid columns={{ sm: 1, base: 1, md: 2,lg:3,xl:4 }}>
         {!loader &&
-          products?.map((item) => (
-            <BnbCard handleViewSingle={handleViewSingle} item={item} />
+          products?.map((item,index) => (
+            <BnbCard key={index} handleViewSingle={handleViewSingle} item={item} />
           ))}
       </SimpleGrid>
 

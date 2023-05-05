@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { MdAddShoppingCart } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import {GET_ALL_PRODUCTS} from "../../Utils/url.js"
 const Trending = () => {
   const [trendingProducts, setTrendingProducts] = useState([]);
   const [loader, setLoader] = useState(true);
@@ -23,9 +24,9 @@ const Trending = () => {
   const getTrendingProduct = () => {
     setLoader(true);
     axios
-      .get("https://hbserver-ous1.onrender.com/getproducts")
+      .get(`${GET_ALL_PRODUCTS}`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setTrendingProducts(res.data);
         setLoader(false);
       })
@@ -53,7 +54,7 @@ const Trending = () => {
 
     cartproduct.price = Number(cartproduct.price);
     // console.log(hbToken, "hbToken");
-    console.log(cartproduct, "cp");
+    // console.log(cartproduct, "cp");
     if (!hbToken) {
       toast({
         title: "LOGGING ERROR ",
@@ -73,7 +74,7 @@ const Trending = () => {
         },
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         toast({
           title: "Product added.",
           description: "We've added your product to the cart.",

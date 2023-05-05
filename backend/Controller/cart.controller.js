@@ -41,7 +41,7 @@ const getCartItems = async (req, res) => {
 
     if (!cart) {
       // if the cart is not found for the user
-      return;
+      // return;
       return res.status(404).json({ message: "Cart not found" });
     }
 

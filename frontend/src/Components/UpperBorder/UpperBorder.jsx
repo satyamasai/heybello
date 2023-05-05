@@ -20,8 +20,8 @@ const UpperBorder = () => {
   
   <Box width={'300%'} className="product_types" fontSize={{sm:'12' ,md:"18"}} border={''}  justifyContent={'space-around'} display={{base:"none",sm:"flex" , md:"flex"}}>
   {
-    product_type.map((pt)=>(
-      <div >
+    product_type.map((pt,index)=>(
+      <div  key={index}>
       <a className="glow_text" href={`/product/${pt}`} style={{textTransform:'capitalize'}}  >{pt}</a>
       </div>
         ))

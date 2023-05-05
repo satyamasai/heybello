@@ -6,7 +6,7 @@ const {addProduct, getProducts, getProductsByBrand, getProductsByType} = require
 
 
 productRouter.get("/addproduct", addProduct);
-productRouter.get("/getproducts", getProducts);
+productRouter.get("/getallproducts", getProducts);
 productRouter.get("/getproductsbybrand/:brand", getProductsByBrand);
 productRouter.get("/getproductsbyType/:type", getProductsByType);
 

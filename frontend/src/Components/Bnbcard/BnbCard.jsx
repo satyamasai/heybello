@@ -38,10 +38,10 @@ export default function BnbCard({ item, handleViewSingle }) {
   // ----------##handle add to cart----##------------//
   
   const toast = useToast();
-  const hbToken = JSON.parse(localStorage.getItem("hbToken")) || null;
-
-
+  
+  
   const handleAddToCart = (cartproduct) => {
+    const hbToken = JSON.parse(localStorage.getItem("hbToken")) || null;
     cartproduct.price = Number(cartproduct.price);
     console.log(hbToken, "hbToken");
     console.log(cartproduct, "cp");

@@ -24,8 +24,8 @@ export default function SimpleSlider() {
   };
   return (
     <Slider className="slider" {...settings}>
-      {tempCarouselData.map((imageUrl) => (
-        <div className="carouselCard">
+      {tempCarouselData.map((imageUrl,index) => (
+        <div className="carouselCard" key={index}>
           <Img height={{sm:"240px",md:'300px' ,base:'150px'} }   src={imageUrl} alt="img" />
         </div>
       ))}
