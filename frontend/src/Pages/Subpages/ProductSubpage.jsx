@@ -31,7 +31,7 @@ const ProductSubpage = () => {
       .then((res) => {
         setAllBrands(res.data);
 
-        allBrand.map((el) => allBrandsNames.push(el.brand));
+        // allBrand.map((el) => allBrandsNames.push(el.brand));
       })
       .catch((err) => {
         setLoader(false);
@@ -47,11 +47,17 @@ const ProductSubpage = () => {
   // }
 
   // -----select - brand name only------------
-  allBrand.map(async (el,index) => {
-    if (!allBrandsNames.includes(el.brand)) {
-      await allBrandsNames.push(el.brand);
-    }
-  });
+ for(let i=0;i<allBrand.length;i++){
+
+  if(!allBrandsNames.includes(allBrand[i].brand)) {
+    allBrandsNames.push(allBrand[i].brand);
+  }
+ }
+  // allBrand.map( (el,index) => {
+  //   return(
+
+  //     )
+  // });
   // console.log(allBrandsNames, "an");
 
   // -------#######-----------#########_--------------------------////
