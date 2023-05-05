@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import BnbCard from "../../Components/Bnbcard/BnbCard";
 import { GET_PRODUCTS_BY_TYPE } from "../../Utils/url";
-const SkeletonNums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+let SkeletonNums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const ProductSubpage = () => {
   const { productname } = useParams();
@@ -19,25 +19,25 @@ const ProductSubpage = () => {
   const [loader, setLoader] = useState(true);
   // console.log(productname, "PT");
   const navigate = useNavigate();
-  const [brand_name, setBrandName] = useState("");
-  const [allBrand, setAllBrands] = useState([]);
+  // const [brand_name, setBrandName] = useState("");
+  // const [allBrand, setAllBrands] = useState([]);
   let allBrandsNames = [];
 
   // ----### ---get all brands name ---####----//
 
-  const getAllBrandsName = () => {
-    axios
-      .get(`${GET_PRODUCTS_BY_TYPE}/${productname}`)
-      .then((res) => {
-        setAllBrands(res.data);
+  // const getAllBrandsName = () => {
+  //   axios
+  //     .get(`${GET_PRODUCTS_BY_TYPE}/${productname}`)
+  //     .then((res) => {
+  //       setAllBrands(res.data);
 
-        // allBrand.map((el) => allBrandsNames.push(el.brand));
-      })
-      .catch((err) => {
-        setLoader(false);
-        console.log(err);
-      });
-  };
+  //       // allBrand.map((el) => allBrandsNames.push(el.brand));
+  //     })
+  //     .catch((err) => {
+  //       setLoader(false);
+  //       console.log(err);
+  //     });
+  // };
 
   // --------if brand name
 
@@ -47,12 +47,12 @@ const ProductSubpage = () => {
   // }
 
   // -----select - brand name only------------
- for(let i=0;i<allBrand.length;i++){
+//  for(let i=0;i<allBrand.length;i++){
 
-  if(!allBrandsNames.includes(allBrand[i].brand)) {
-    allBrandsNames.push(allBrand[i].brand);
-  }
- }
+//   if(!allBrandsNames.includes(allBrand[i].brand)) {
+//     allBrandsNames.push(allBrand[i].brand);
+//   }
+//  }
   // allBrand.map( (el,index) => {
   //   return(
 
@@ -77,16 +77,17 @@ const ProductSubpage = () => {
 
   useEffect(() => {
     getProductsByCategory();
-    getAllBrandsName();
+    // getAllBrandsName();
   }, []);
 
   // ------------------------handleViewSingle----------------------------
-
+  
   const handleViewSingle = (single_item) => {
     navigate(`/singleproduct/${single_item.id}`);
     // console.log("id",id)
     localStorage.setItem("single_product", JSON.stringify(single_item));
   };
+  // ------------------------handleViewSingle----------------------------
 
   return (
     <div className="product_subpage">
@@ -108,7 +109,7 @@ const ProductSubpage = () => {
           placeholder="Select By Brand!"
           className="subpage_select"
           onChange={(e) => {
-            setBrandName(e.target.value);
+            // setBrandName(e.target.value);
             let params = { brand_name: e.target.value };
             setLoader(true);
             setSearchParams(params);
