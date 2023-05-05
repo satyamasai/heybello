@@ -16,16 +16,16 @@
 }
 
 .bnbcard {
-  width: 300px;
+  /* width: 300px; */
   /* border:1px solid goldenrod; */
-  border-radius: 10px;
+  border-radius: 4px;
   
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.664);
-  background: rgba(240, 193, 105, 0.719);
-  box-shadow: 6px 6px #acacac, -2px -2px 16px #ffffff;
+  /* border: 1px solid rgba(255, 255, 255, 0.664); */
+  background: rgba(250, 153, 235, 0.719);
+  box-shadow:5px 6px 6px #acacac, -2px -2px 16px #ffffff;
 }
 .bnbcard>img{
-  border-radius: 10px;
+  border-radius: 8px;
 }

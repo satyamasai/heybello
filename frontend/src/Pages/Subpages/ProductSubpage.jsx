@@ -21,25 +21,26 @@ const ProductSubpage = () => {
   const [products, setProducts] = useState([]);
   const [loader, setLoader] = useState(true);
   console.log(productname, "PT");
-  // const [brand_name, setBrandName] = useState("");
-  // const [allBrand, setAllBrands] = useState([]);
-  let allBrandsNames = [1, 2];
+  const [brand_name, setBrandName] = useState("");
+  const [allBrand, setAllBrands] = useState([]);
+  const [searchParams,setSearchParams] = useSearchParams()
+  let allBrandsNames = [];
 
   // ----### ---get all brands name ---####----//
 
-  // const getAllBrandsName = () => {
-  //   axios
-  //     .get(`${GET_PRODUCTS_BY_TYPE}/${productname}`)
-  //     .then((res) => {
-  //       setAllBrands(res.data);
+  const getAllBrandsName = (productname) => {
+    axios
+      .get(`${GET_PRODUCTS_BY_TYPE}/${productname}`)
+      .then((res) => {
+        setAllBrands(res.data);
 
-  //       // allBrand.map((el) => allBrandsNames.push(el.brand));
-  //     })
-  //     .catch((err) => {
-  //       setLoader(false);
-  //       console.log(err);
-  //     });
-  // };
+        // allBrand.map((el) => allBrandsNames.push(el.brand));
+      })
+      .catch((err) => {
+        setLoader(false);
+        console.log(err);
+      });
+  };
 
   // --------if brand name
 
@@ -49,12 +50,12 @@ const ProductSubpage = () => {
   // }
 
   // -----select - brand name only------------
-  //  for(let i=0;i<allBrand.length;i++){
+   for(let i=0;i<allBrand.length;i++){
 
-  //   if(!allBrandsNames.includes(allBrand[i].brand)) {
-  //     allBrandsNames.push(allBrand[i].brand);
-  //   }
-  //  }
+    if(!allBrandsNames.includes(allBrand[i].brand)) {
+      allBrandsNames.push(allBrand[i].brand);
+    }
+   }
   // allBrand.map( (el,index) => {
   //   return(
 
@@ -67,7 +68,7 @@ const ProductSubpage = () => {
     axios
       .get(`${GET_PRODUCTS_BY_TYPE}/${productname}`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setLoader(false);
         setProducts(res.data);
       })
@@ -79,7 +80,7 @@ const ProductSubpage = () => {
 
   useEffect(() => {
     getProductsByCategory(productname);
-    // getAllBrandsName();
+    getAllBrandsName(productname);
   }, [productname]);
 
   // ------------------------handleViewSingle----------------------------
@@ -96,7 +97,7 @@ const ProductSubpage = () => {
       <Box
         alignItems={"center"}
         display={"flex"}
-        justifyContent={"center"}
+        justifyContent={'space-around'}
         h={"50px"}
         w={"100%"}
       >
@@ -111,10 +112,10 @@ const ProductSubpage = () => {
           placeholder="Select By Brand!"
           className="subpage_select"
           onChange={(e) => {
-            // setBrandName(e.target.value);
-            // let params = { brand_name: e.target.value };
+            setBrandName(e.target.value);
+            let params = { brand_name: e.target.value };
             setLoader(true);
-            // setSearchParams(params);
+            setSearchParams(params);
           }}
         >
           {allBrandsNames?.map((brands, index) => (

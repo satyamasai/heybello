@@ -89,22 +89,22 @@ export default function BnbCard({ item, handleViewSingle }) {
   return (
     <Box
     width={'auto'}
-    border={'1px solid black'}
+    border={' '}
       className="bnbcard"
       boxSizing="border-box"
-      h="450px"
+      h="400px"
       m="5"
       p="2"
-      color={"goldenrod"}
+      color={""}
       maxW="sm"
       borderWidth="1px"
-      borderRadius="lg"
+      // borderRadius="lg"
       overflow="hidden"
     >
       {item ? (
         <Image
           onClick={() => handleViewSingle(item)}
-          h="46%"
+          h="42%"
           w="80%"
           m="auto"
           src={property.imageUrl}
