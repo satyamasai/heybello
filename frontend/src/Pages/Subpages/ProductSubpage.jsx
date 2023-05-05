@@ -14,11 +14,11 @@ import { GET_PRODUCTS_BY_TYPE } from "../../Utils/url";
 let SkeletonNums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const ProductSubpage = () => {
+  const navigate = useNavigate();
   const { productname } = useParams();
   const [products, setProducts] = useState([]);
   const [loader, setLoader] = useState(true);
-  // console.log(productname, "PT");
-  const navigate = useNavigate();
+  console.log(productname, "PT");
   // const [brand_name, setBrandName] = useState("");
   // const [allBrand, setAllBrands] = useState([]);
   let allBrandsNames = [1,2];
@@ -66,8 +66,8 @@ const ProductSubpage = () => {
       .get(`${GET_PRODUCTS_BY_TYPE}/${productname}`)
       .then((res) => {
         // console.log(res.data);
-        setProducts(res.data);
         setLoader(false);
+        setProducts(res.data);
       })
       .catch((err) => {
         setLoader(false);

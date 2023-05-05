@@ -37,7 +37,7 @@ export default function Cart() {
           },
         })
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           setCartItems(res.data.cart);
         })
         .catch((err) => {
