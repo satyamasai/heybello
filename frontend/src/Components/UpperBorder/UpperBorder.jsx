@@ -18,10 +18,10 @@ let product_type = [
 const UpperBorder = () => {
   return <div className="upper_border">
   
-  <Box width={'300%'} className="product_types" fontSize={{sm:'12' ,md:"18"}} border={''}  justifyContent={'space-around'} display={{base:"none",sm:"flex" , md:"flex"}}>
+  <Box width={'300%'} className="product_types" fontSize={{sm:'12' ,md:"18"}} border={''}  justifyContent={'space-around'} flexWrap={'wrap'} display={{base:"flex",sm:"flex" , md:"flex"}}>
   {
     product_type.map((pt,index)=>(
-      <div  key={index}>
+      <div style={{margin:'5px'}} key={index}>
       <a className="glow_text" href={`/product/${pt}`} style={{textTransform:'capitalize'}}  >{pt}</a>
       </div>
         ))
