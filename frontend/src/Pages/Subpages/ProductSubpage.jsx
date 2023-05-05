@@ -10,6 +10,7 @@ import {
   SkeletonText,
 } from "@chakra-ui/react";
 import BnbCard from "../../Components/Bnbcard/BnbCard";
+import { GET_PRODUCTS_BY_TYPE } from "../../Utils/url";
 const SkeletonNums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const ProductSubpage = () => {
@@ -26,7 +27,7 @@ const ProductSubpage = () => {
 
   const getAllBrandsName = () => {
     axios
-      .get(`https://hbserver-ous1.onrender.com/getproductsbytype/${productname}`)
+      .get(`${GET_PRODUCTS_BY_TYPE}/${productname}`)
       .then((res) => {
         setAllBrands(res.data);
 
@@ -46,7 +47,7 @@ const ProductSubpage = () => {
   // }
 
   // -----select - brand name only------------
-  allBrand.map(async (el) => {
+  allBrand.map(async (el,index) => {
     if (!allBrandsNames.includes(el.brand)) {
       await allBrandsNames.push(el.brand);
     }
@@ -56,7 +57,7 @@ const ProductSubpage = () => {
   // -------#######-----------#########_--------------------------////
   const getProductsByCategory = () => {
     axios
-      .get(`https://hbserver-ous1.onrender.com/getproductsbytype/${productname}`)
+      .get(`${GET_PRODUCTS_BY_TYPE}/${productname}`)
       .then((res) => {
         // console.log(res.data);
         setProducts(res.data);
@@ -107,8 +108,8 @@ const ProductSubpage = () => {
             setSearchParams(params);
           }}
         >
-          {allBrandsNames?.map((brands) => (
-            <option className="subpage_option" value={brands}>
+          {allBrandsNames?.map((brands,index) => (
+            <option key={index} className="subpage_option" value={brands}>
               {brands}
             </option>
           ))}
@@ -116,8 +117,8 @@ const ProductSubpage = () => {
       </Box>
       <SimpleGrid columns={{ sm: 2, base: 1, md: 2, lg: 3, xl: 4 }}>
         {!loader &&
-          products.map((item) => (
-            <BnbCard handleViewSingle={handleViewSingle} item={item} />
+          products.map((item,index) => (
+            <BnbCard key={index} handleViewSingle={handleViewSingle} item={item} />
           ))}
         {/** -----##  Skeleton effect ##------- */}
         {loader &&

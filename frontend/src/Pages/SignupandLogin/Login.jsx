@@ -34,7 +34,7 @@ const toast= useToast()
       axios
       .post(`${USER_LOGIN}`, userLoginData)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         localStorage.setItem("hbToken",JSON.stringify(res.data.token))
         setLogging(false)
         navigate("/")
@@ -48,10 +48,24 @@ const toast= useToast()
 
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err,"ERR");
         setLogging(false)
+        toast({
+          title: 'Login failed.',
+          description: err.response.data.message,
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        })
         });
     } else {
+       toast({
+          title: 'PLEASE enter correct info.',
+          description: "Please provide email and password..",
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        })
       return;
     }
   };

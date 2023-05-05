@@ -9,6 +9,7 @@ import {
 import { StarIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
 import axios  from 'axios';
+import { ADD_TO_CART } from "../../Utils/url";
 
 export default function BnbCard({ item, handleViewSingle }) {
   // console.log("bnbitem",handleViewSingle)
@@ -58,7 +59,7 @@ export default function BnbCard({ item, handleViewSingle }) {
     // cartItems.push(cartproduct);
     // localStorage.setItem("cartItems", JSON.stringify(cartItems));
     axios
-      .post("http://localhost:8080/addtocart", cartproduct, {
+      .post(`${ADD_TO_CART}`, cartproduct, {
         headers: {
           Authorization: `Bearer ${hbToken}`,
         },

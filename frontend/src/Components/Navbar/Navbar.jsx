@@ -91,8 +91,8 @@ export default function Navbar() {
                  textAlign={'center'}
                  alignItems={'center'}
                 >
-                {links.map((link) => (
-                  <ReactRouter m="5px" to={link.path}>
+                {links.map((link,index) => (
+                  <ReactRouter key={index} m="5px" to={link.path}>
                     {link.label }
                   </ReactRouter>
                 ))}
