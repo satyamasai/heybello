@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./ProductSubpage.css";
 import axios from "axios";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
@@ -21,7 +21,7 @@ const ProductSubpage = () => {
   const navigate = useNavigate();
   // const [brand_name, setBrandName] = useState("");
   // const [allBrand, setAllBrands] = useState([]);
-  let allBrandsNames = [];
+  let allBrandsNames = [1,2];
 
   // ----### ---get all brands name ---####----//
 
@@ -41,18 +41,18 @@ const ProductSubpage = () => {
 
   // --------if brand name
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  // const [searchParams, setSearchParams] = useSearchParams();
   // if(brand_name){
   //   setSearchParams(brand_name)
   // }
 
   // -----select - brand name only------------
-//  for(let i=0;i<allBrand.length;i++){
+  //  for(let i=0;i<allBrand.length;i++){
 
-//   if(!allBrandsNames.includes(allBrand[i].brand)) {
-//     allBrandsNames.push(allBrand[i].brand);
-//   }
-//  }
+  //   if(!allBrandsNames.includes(allBrand[i].brand)) {
+  //     allBrandsNames.push(allBrand[i].brand);
+  //   }
+  //  }
   // allBrand.map( (el,index) => {
   //   return(
 
@@ -61,7 +61,7 @@ const ProductSubpage = () => {
   // console.log(allBrandsNames, "an");
 
   // -------#######-----------#########_--------------------------////
-  const getProductsByCategory = () => {
+  const getProductsByCategory = (productname) => {
     axios
       .get(`${GET_PRODUCTS_BY_TYPE}/${productname}`)
       .then((res) => {
@@ -76,12 +76,12 @@ const ProductSubpage = () => {
   };
 
   useEffect(() => {
-    getProductsByCategory();
+    getProductsByCategory(productname);
     // getAllBrandsName();
-  }, []);
+  },[productname]);
 
   // ------------------------handleViewSingle----------------------------
-  
+
   const handleViewSingle = (single_item) => {
     navigate(`/singleproduct/${single_item.id}`);
     // console.log("id",id)
@@ -110,12 +110,12 @@ const ProductSubpage = () => {
           className="subpage_select"
           onChange={(e) => {
             // setBrandName(e.target.value);
-            let params = { brand_name: e.target.value };
+            // let params = { brand_name: e.target.value };
             setLoader(true);
-            setSearchParams(params);
+            // setSearchParams(params);
           }}
         >
-          {allBrandsNames?.map((brands,index) => (
+          {allBrandsNames?.map((brands, index) => (
             <option key={index} className="subpage_option" value={brands}>
               {brands}
             </option>
@@ -124,8 +124,12 @@ const ProductSubpage = () => {
       </Box>
       <SimpleGrid columns={{ sm: 2, base: 1, md: 2, lg: 3, xl: 4 }}>
         {!loader &&
-          products.map((item,index) => (
-            <BnbCard key={index} handleViewSingle={handleViewSingle} item={item} />
+          products.map((item, index) => (
+            <BnbCard
+              key={index}
+              handleViewSingle={handleViewSingle}
+              item={item}
+            />
           ))}
         {/** -----##  Skeleton effect ##------- */}
         {loader &&
