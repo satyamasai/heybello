@@ -1,6 +1,6 @@
 import React from "react";
 import "./PopularBrands.css";
-import { Box, Flex, Heading, Image } from "@chakra-ui/react";
+import { Box, Flex, Heading, Image, SimpleGrid } from "@chakra-ui/react";
 import { Navigate, useNavigate } from "react-router-dom";
 let popularbrands = [
   {
@@ -106,12 +106,13 @@ const PopularBrands = () => {
   return (
     <div className="popularbrands">
       <Heading>Top Brands</Heading>
-      <Flex
+      <SimpleGrid
+      className="popular_flex"
         p={"10px"}
-        gap={"20px"}
-        className="popular_flex"
-        
-        wrap="wrap"
+        gap={"10px"}
+        // display={{sm:'grid', md:'grid',lg:'flex '}}
+        columns={{base:2,sm:3, md:3}}
+      
       >
         {popularbrands.map((brand,index) => (
           <Box
@@ -119,11 +120,12 @@ const PopularBrands = () => {
             borderRadius={"10px"}
             cursor="pointer"
             onClick={() => handleBrandPage(brand.brand_name)}
-            w={"180px"}
+            w={{base:'100px',sm:'120px',md:"180px"}}
             m={5}
             h={"120px"}
             margin={"auto"}
             p={'5px'}
+            border={''}
             borderColor="goldenrod"
             color="goldenrod"
             display={"flex"}
@@ -138,7 +140,7 @@ const PopularBrands = () => {
             />
           </Box>
         ))}
-      </Flex>
+      </SimpleGrid>
     </div>
   );
 };
