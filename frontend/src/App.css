@@ -1,4 +1,9 @@
 .App {
   text-align: center;
+  background: linear-gradient();
+  /* background-image: url('https://images.unsplash.com/photo-1604077137850-c6d2e2a44cce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGdyYWRpZW50fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60'); */
+  background-size: 100%;
+  background: rgb(238,174,202);
+background: radial-gradient(circle, rgba(238,174,202,1) 56%, rgba(148,187,233,1) 100%);
 }
 

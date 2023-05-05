@@ -111,7 +111,7 @@ const PopularBrands = () => {
         p={"10px"}
         gap={"10px"}
         // display={{sm:'grid', md:'grid',lg:'flex '}}
-        columns={{base:2,sm:3, md:3}}
+        columns={{base:2,sm:3, md:4}}
       
       >
         {popularbrands.map((brand,index) => (
@@ -120,7 +120,7 @@ const PopularBrands = () => {
             borderRadius={"10px"}
             cursor="pointer"
             onClick={() => handleBrandPage(brand.brand_name)}
-            w={{base:'100px',sm:'120px',md:"180px"}}
+            w={{base:'160px',sm:'180px',md:"180px"}}
             m={5}
             h={"120px"}
             margin={"auto"}

@@ -6,8 +6,12 @@
 .popular_flex{
  width: 98%;
  margin: auto;
- border: 1px solid red;
+ /* border: 1px solid red; */
 
  margin-top: 40px;
 
+}
+.popular_flex>div{
+    /* border: 1px solid blue; */
+    background-color: rgba(243, 233, 233, 0.74);
 }
