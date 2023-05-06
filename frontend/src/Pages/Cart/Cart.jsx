@@ -10,24 +10,23 @@ import {
   DrawerCloseButton,
   useDisclosure,
   Button,
-  Input,
   Box,
   Flex,
   Select,
-  useSliderStyles,
 } from "@chakra-ui/react";
 import { FaCartPlus } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import { GET_ALL_CART_ITEMS ,DELETE_CART_ITEM} from "../../Utils/url.js";
+import { GET_ALL_CART_ITEMS, DELETE_CART_ITEM } from "../../Utils/url.js";
 import axios from "axios";
 export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
+  let count = localStorage.getItem("hbcartcount");
 
   //----## getting cart items of user----///####-----
   const hbToken = JSON.parse(localStorage.getItem("hbToken"));
- 
+  console.log("first");
   useEffect(() => {
     const getcartItems = async () => {
       axios
@@ -37,7 +36,9 @@ export default function Cart() {
           },
         })
         .then((res) => {
-          // console.log(res);
+          console.log(res);
+          localStorage.setItem("hbcartcount", res.data.cart.length);
+          // count = localStorage.getItem("hbcartcount");
           setCartItems(res.data.cart);
         })
         .catch((err) => {
@@ -45,7 +46,7 @@ export default function Cart() {
         });
     };
     getcartItems();
-  });
+  },[hbToken]);
 
   // -----handle delete---####////
 
@@ -60,6 +61,7 @@ export default function Cart() {
       })
       .then((res) => {
         console.log(res);
+        // window.location.reload()
       })
       .catch((err) => {
         console.log(err);
@@ -70,6 +72,7 @@ export default function Cart() {
     <>
       <Button m={"5px"} ref={btnRef} onClick={onOpen}>
         <FaCartPlus />
+        {count && hbToken &&<div className="cart_count">{count}</div>}{" "}
       </Button>
 
       <Drawer
@@ -84,9 +87,9 @@ export default function Cart() {
           <DrawerHeader>Cart</DrawerHeader>
 
           <DrawerBody className="drawer_body">
-            {cartItems.map((item,index) => (
+            {cartItems.map((item, index) => (
               <Box
-              key={index}
+                key={index}
                 mt={"4px"}
                 boxSizing="border-box"
                 w={"99%"}

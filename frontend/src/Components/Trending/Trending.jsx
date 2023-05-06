@@ -135,7 +135,7 @@ const Trending = () => {
                     leftIcon={<MdAddShoppingCart />}
                     colorScheme="pink"
                     variant="solid"
-                    size={{sm:"xsm",md:"md"}}
+                    size={{sm:"xsm",md:"sm",lg:'md'}}
 
                   >
                     Add to cart
