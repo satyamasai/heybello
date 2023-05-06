@@ -2,7 +2,7 @@ import { useState } from "react";
 import mybellalogo from "./mybellalogo.jpg";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import "./Navbar.css";
-import { Link as ReactRouter } from "react-router-dom";
+import { Navigate, Link as ReactRouter, useNavigate } from "react-router-dom";
 import { FaCartPlus } from "react-icons/fa";
 import {
   Box,
@@ -57,7 +57,7 @@ export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const heyBelloLoginToken = false;
   const [isBoxVisible, setIsBoxVisible] = useState(false);
-
+const navigate= useNavigate()
   const hbToken = JSON.parse(localStorage.getItem("hbToken")) || null;
 
   const handleMouseOver = () => {
@@ -67,6 +67,11 @@ export default function Navbar() {
   const handleMouseOut = () => {
     setIsBoxVisible(false);
   };
+
+  const handleLogout=()=>{
+    localStorage.setItem("hbToken",null);
+    navigate("/")
+  }
 
   return (
     <>
@@ -146,15 +151,19 @@ export default function Navbar() {
                           border={"0px solid red"}
                           alignItems={"center"}
                         >
-                          <Button colorScheme="pink" size={"sm"}>
-                            Login
+                          <Button  colorScheme="pink" size={"sm"}>
+                           <a href="/login">
+                           Login
+                           </a>
                           </Button>{" "}
                           <Button colorScheme="pink" size={"sm"}>
-                            Signup
+                          <a href="/signup">
+                          Signup
+                          </a>
                           </Button>
                         </Box>
                     ) : (
-                      <Button m={"auto"} w={"180px"} colorScheme="red">
+                      <Button omClick={handleLogout}  m={"auto"} w={"180px"} colorScheme="red">
                         Logout
                       </Button>
                     )}
@@ -183,7 +192,7 @@ export default function Navbar() {
                     <Avatar
                       size={"sm"}
                       src={
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLCSy6Nfn8qEh-1dav0-l6A4TXudU6xzfTvMVZEWegjA&usqp=CAU&ec=48665698"
+                        "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-business-user-profile-vector-png-image_1541960.jpg"
                       }
                     />
                   </MenuButton>
@@ -205,7 +214,7 @@ export default function Navbar() {
                     <Avatar
                       size={"2xl"}
                       src={
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLCSy6Nfn8qEh-1dav0-l6A4TXudU6xzfTvMVZEWegjA&usqp=CAU&ec=48665698"
+                        "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-business-user-profile-vector-png-image_1541960.jpg"
                       }
                     />
                   </Center>
@@ -217,7 +226,7 @@ export default function Navbar() {
                   <MenuDivider />
                   <MenuItem>Your Servers</MenuItem>
                   <MenuItem>Account Settings</MenuItem>
-                  <MenuItem>Logout</MenuItem>
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
                 </MenuList>
               </Menu>
             </Stack>
