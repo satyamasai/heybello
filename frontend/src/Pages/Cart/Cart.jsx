@@ -27,7 +27,7 @@ export default function Cart() {
 
   //----## getting cart items of user----///####-----
   const hbToken = JSON.parse(localStorage.getItem("hbToken"));
-
+ 
   useEffect(() => {
     const getcartItems = async () => {
       axios
@@ -45,7 +45,7 @@ export default function Cart() {
         });
     };
     getcartItems();
-  }, []);
+  });
 
   // -----handle delete---####////
 
