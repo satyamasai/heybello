@@ -49,8 +49,6 @@ const links = [
   { label: "Luxe", path: "/luxe" },
   { label: "Fashion", path: "/fashion" },
   { label: "Beauty Advise", path: "/beautiadvise" },
-  { label: "Login", path: "/login" },
-  { label: "Signup", path: "/signup" },
 ];
 
 export default function Navbar() {
@@ -59,6 +57,8 @@ export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const heyBelloLoginToken = false;
   const [isBoxVisible, setIsBoxVisible] = useState(false);
+
+  const hbToken = JSON.parse(localStorage.getItem("hbToken")) || null;
 
   const handleMouseOver = () => {
     setIsBoxVisible(true);
@@ -85,18 +85,21 @@ export default function Navbar() {
                 justifyContent={"space-around"}
                 border="1px"
                 borderColor="grey.400"
-                w={'35rem'}
-                h={'50px'}
+                w={"28rem"}
+                h={"40px"}
                 display={{ base: "none", sm: "none", md: "flex" }}
-                 textAlign={'center'}
-                 alignItems={'center'}
-                >
-                {links.map((link,index) => (
-                  <ReactRouter key={index} m="5px" to={link.path}>
-                    {link.label }
+                textAlign={"center"}
+                alignItems={"center"}
+              >
+                {links.map((link, index) => (
+                  <ReactRouter key={index} m="3px" to={link.path}>
+                    {link.label}
                   </ReactRouter>
                 ))}
+                
+          
               </Box>
+            
               <Box display={{ md: "none" }}>
                 {!down ? (
                   <IconButton
@@ -109,24 +112,52 @@ export default function Navbar() {
                 {down && (
                   <Flex
                     pos="absolute"
-                    top="70"
+                    top="65px"
                     left={0}
                     w={"100vw"}
-                    bg={"tomato"}
+                    bg={"pink"}
                     direction={"column"}
                     zIndex={20}
                     className="nav_dropdownmenu"
+                    p={"5px"}
                   >
                     {links.map((link) => (
                       <Link
                         onClick={setDown.off}
                         as={ReactRouter}
                         to={link.path}
-                        m="10px"
+                        m="8px"
+                        width={"140px"}
+                        borderBottom={"2px solid white"}
+                        alignSelf={"center"}
+                        fontWeight={"bolder"}
                       >
                         {link.label}
                       </Link>
                     ))}
+                      {!hbToken ? (
+                        <Box
+                          display={"flex"}
+                          justifyContent={"space-around"}
+                          m={"auto"}
+                          textAlign={"center"}
+                          w={"240px"}
+                          h={"40px"}
+                          border={"0px solid red"}
+                          alignItems={"center"}
+                        >
+                          <Button colorScheme="pink" size={"sm"}>
+                            Login
+                          </Button>{" "}
+                          <Button colorScheme="pink" size={"sm"}>
+                            Signup
+                          </Button>
+                        </Box>
+                    ) : (
+                      <Button m={"auto"} w={"180px"} colorScheme="red">
+                        Logout
+                      </Button>
+                    )}
                   </Flex>
                 )}
               </Box>
@@ -141,7 +172,7 @@ export default function Navbar() {
               </Button>
 
               <Menu>
-                {heyBelloLoginToken ? (
+                {hbToken ? (
                   <MenuButton
                     as={Button}
                     rounded={"full"}
@@ -157,13 +188,13 @@ export default function Navbar() {
                     />
                   </MenuButton>
                 ) : (
-                  <Box display={{ sm: "none", base: "none" }}>
+                  <Box display={{ sm: "none", base: "none" ,md:"flex"}}>
                     <ReactRouter to="/login">
-                      <Button>Login</Button>
+                      Login
                     </ReactRouter>
-
+/
                     <ReactRouter to="/signup">
-                      <Button> Signup </Button>
+                       Signup 
                     </ReactRouter>
                   </Box>
                 )}
