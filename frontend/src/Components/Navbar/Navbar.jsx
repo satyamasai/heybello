@@ -192,7 +192,7 @@ const navigate= useNavigate()
                     <Avatar
                       size={"sm"}
                       src={
-                        "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-business-user-profile-vector-png-image_1541960.jpg"
+                        "https://news.harvard.edu/wp-content/uploads/2014/10/hello-kitty-wallpaper-37_605.jpg"
                       }
                     />
                   </MenuButton>
@@ -214,7 +214,7 @@ const navigate= useNavigate()
                     <Avatar
                       size={"2xl"}
                       src={
-                        "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-business-user-profile-vector-png-image_1541960.jpg"
+                        "https://news.harvard.edu/wp-content/uploads/2014/10/hello-kitty-wallpaper-37_605.jpg"
                       }
                     />
                   </Center>
