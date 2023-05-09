@@ -7,3 +7,59 @@ backdrop-filter: blur(5px);
 -webkit-backdrop-filter: blur(5px);
 border: 1px solid rgba(255, 255, 255, 0.3);
 }
+.card_img{
+    width:100px;
+    height:80px;
+    border-radius: 10px;
+}
+
+.payment_box{
+    /* border: 1px solid red; */
+    margin: auto;
+}
+
+.payment_inner_div{
+    width: 95%;
+    margin:20px  auto;
+    height: 90%;
+    /* border: 2px solid orangered; */
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+}
+.coupon{
+    /* border: 1px solid red */
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+}
+.payment{
+    width: 90%;
+    height: auto;
+    /* border: 1px solid rgb(71, 222, 241); */
+ margin: auto;
+}
+.payment>div{
+    width: 90%;
+    margin: auto;
+    height: 40px;
+    text-align: center;
+    border: 1px solid rgb(201, 190, 233);
+    display: flex;
+    padding: 5px;
+    box-sizing: border-box;
+    justify-content: space-between;
+}
+.redspan{
+    color: red;
+}
+.greenspan{
+    color: green;
+}
+.place_order_btn{
+
+}
