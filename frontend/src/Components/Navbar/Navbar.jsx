@@ -75,9 +75,9 @@ const navigate= useNavigate()
   }
 
   return (
-    <>
-      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
-        <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
+    
+      <Box   bg={useColorModeValue("gray.100", "gray.900")} px={1}>
+        <Flex w={'100%'} border={'0px solid red'} h={16} alignItems={"center"} justifyContent={"space-between"}>
         <Box className="hamburger" display={{ md: "none" }} >
         {!down ? (
           <IconButton
@@ -235,6 +235,6 @@ const navigate= useNavigate()
           </Flex>
         </Flex>
       </Box>
-    </>
+    
   );
 }
