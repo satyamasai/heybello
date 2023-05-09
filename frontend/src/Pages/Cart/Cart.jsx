@@ -21,7 +21,7 @@ import { GET_ALL_CART_ITEMS, DELETE_CART_ITEM } from "../../Utils/url.js";
 import axios from "axios";
 import { Link } from "react-router-dom";
 export default function Cart({bnbrender}) {
-  console.log(bnbrender,'atcart')
+  // console.log(bnbrender,'atcart')
   const [cartItems, setCartItems] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
@@ -42,9 +42,9 @@ export default function Cart({bnbrender}) {
             Authorization: `Bearer ${hbToken}`,
           },
         })
-        .then(async(res) => {
+        .then((res) => {
           setCartItems(res.data.cart);
-          await setCount(res.data.cart.length)
+           setCount(res.data.cart.length)
           // count.current=res.data.cart.length;
           // console.log(res.data.cart.length,"count");
         })
@@ -53,7 +53,7 @@ export default function Cart({bnbrender}) {
         });
     };
     getcartItems();
-  },[hbToken,count,render,bnbrender]);
+  },[hbToken,count,render]);
 
   // -----handle delete---####////
 
