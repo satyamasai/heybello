@@ -65,6 +65,7 @@ const ProductSubpage = () => {
 
   // -------#######-----------#########_--------------------------////
   const getProductsByCategory = (productname) => {
+    setLoader(true);
     axios
       .get(`${GET_PRODUCTS_BY_TYPE}/${productname}`)
       .then((res) => {
@@ -114,7 +115,7 @@ const ProductSubpage = () => {
           onChange={(e) => {
             setBrandName(e.target.value);
             let params = { brand_name: e.target.value };
-            setLoader(true);
+           
             setSearchParams(params);
           }}
         >

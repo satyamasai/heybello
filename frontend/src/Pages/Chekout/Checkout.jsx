@@ -11,13 +11,16 @@ import {
   InputRightElement,
   Select,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import { MdCheckCircleOutline, MdDelete, MdLocalOffer } from "react-icons/md";
 import axios from "axios";
 import { GET_ALL_CART_ITEMS, DELETE_CART_ITEM } from "../../Utils/url.js";
 
 const Checkout = () => {
+  const toast = useToast();
   const [cartItems, setCartItems] = useState([]);
+  const [loading, setLoading] = useState(false);
   //   const [totalAmount, setTotalAmount] = useState(0);
   let quantities = [1, 2, 3, 4];
   //----## getting cart items of user----///####-----
@@ -50,11 +53,12 @@ const Checkout = () => {
 
   console.log(totalAmount, "ta");
 
-  // -----handle delete---####////
+  // ---=-------------handle DELETE-----------####////
 
   const handleDeleteItem = (id) => {
+   
     const hbToken = JSON.parse(localStorage.getItem("hbToken")) || null;
-
+    setLoading(true);
     axios
       .delete(`${DELETE_CART_ITEM}/${id}`, {
         headers: {
@@ -63,10 +67,18 @@ const Checkout = () => {
       })
       .then((res) => {
         console.log(res);
-        // window.location.reload()
+        setLoading(false);
+        toast({
+          title: `Item deleted`,
+          position: 'top-left',
+          isClosable: true,
+          status:'error'
+        });
+        window.location.reload()
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false);
       });
   };
 
@@ -161,7 +173,12 @@ const Checkout = () => {
             <div>
               <h2>PAYMENT-DETAILS</h2>
             </div>
-            <Box  border={'0px solid red'} flexDirection={{base:"column",md:"row" }} display={{  md: "flex" }} className="coupon">
+            <Box
+              border={"0px solid red"}
+              flexDirection={{ base: "column", md: "row" }}
+              display={{ md: "flex" }}
+              className="coupon"
+            >
               <InputGroup outline={"none"} w={"85%"}>
                 <InputLeftElement
                   pointerEvents="none"
@@ -174,7 +191,12 @@ const Checkout = () => {
                   children={<MdCheckCircleOutline color="green.500" />}
                 />
               </InputGroup>
-              <Button mt={{base:'10px' ,md:"0"}} w={{ base: "80px" ,md:"100px" }} size={"sm"} colorScheme="green">
+              <Button
+                mt={{ base: "10px", md: "0" }}
+                w={{ base: "80px", md: "100px" }}
+                size={"sm"}
+                colorScheme="green"
+              >
                 Apply
               </Button>
             </Box>

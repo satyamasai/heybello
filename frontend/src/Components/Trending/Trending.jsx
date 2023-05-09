@@ -16,6 +16,7 @@ import {GET_ALL_PRODUCTS} from "../../Utils/url.js"
 const Trending = () => {
   const [trendingProducts, setTrendingProducts] = useState([]);
   const [loader, setLoader] = useState(true);
+  const [cartLoader, setCartLoader] = useState(false);
   const navigate = useNavigate();
   const skelatonNums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   //---##--hbkey-----##
@@ -47,14 +48,14 @@ const Trending = () => {
   };
 
   // ----------##handle add to cart----##------------//
-  // const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  
   const toast = useToast();
   const handleAddToCart = (cartproduct) => {
+    setCartLoader(true)
     const hbToken = JSON.parse(localStorage.getItem("hbToken"))  ;
 
     cartproduct.price = Number(cartproduct.price);
-    // console.log(hbToken, "hbToken");
-    // console.log(cartproduct, "cp");
+  
     if (!hbToken) {
       toast({
         title: "LOGGING ERROR ",
@@ -65,8 +66,7 @@ const Trending = () => {
       });
       return navigate("/login");
     }
-    // cartItems.push(cartproduct);
-    // localStorage.setItem("cartItems", JSON.stringify(cartItems));
+   
     axios
       .post("https://hbserver-ous1.onrender.com/addtocart", cartproduct, {
         headers: {
@@ -82,9 +82,11 @@ const Trending = () => {
           duration: 2000,
           isClosable: true,
         });
+        setCartLoader(false)
       })
       .catch((err) => {
         console.log(err);
+        setCartLoader(false)
         toast({
           title: "Check again..",
           description: "Something went wrong",
@@ -128,7 +130,7 @@ const Trending = () => {
                   ₹ <span style={{ color: "black" }}>{product.price}</span>
                 </div>
                 <div>
-                  <Button
+                 {!cartLoader ? <Button
 
                   className="trending_cart_btn"
                     onClick={() => handleAddToCart(product)}
@@ -139,7 +141,9 @@ const Trending = () => {
 
                   >
                     Add to cart
-                  </Button>
+                  </Button> : <Button isLoading colorScheme='teal' variant='solid'>
+                  Email
+                </Button>}
                 </div>
               </div>
             </div>
