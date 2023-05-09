@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Cart.css";
 import {
   Drawer,
@@ -18,17 +18,18 @@ import { FaCartPlus } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { GET_ALL_CART_ITEMS, DELETE_CART_ITEM } from "../../Utils/url.js";
 import axios from "axios";
+import { Link } from "react-router-dom";
 export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
-  let count = localStorage.getItem("hbcartcount");
-
+  const [count,setCount]= useState(null)
+// let count=useRef();
   //----## getting cart items of user----///####-----
   const hbToken = JSON.parse(localStorage.getItem("hbToken"));
   console.log("first");
   useEffect(() => {
-    const getcartItems = async () => {
+    const getcartItems = async (count) => {
       axios
         .get(`${GET_ALL_CART_ITEMS}`, {
           headers: {
@@ -36,17 +37,17 @@ export default function Cart() {
           },
         })
         .then((res) => {
-          console.log(res);
-          localStorage.setItem("hbcartcount", res.data.cart.length);
-          // count = localStorage.getItem("hbcartcount");
           setCartItems(res.data.cart);
+          setCount(res.data.cart.length)
+          // count.current=res.data.cart.length;
+          console.log(count,"count");
         })
         .catch((err) => {
           console.log(err);
         });
     };
     getcartItems();
-  },[hbToken]);
+  },[hbToken,count]);
 
   // -----handle delete---####////
 
@@ -72,7 +73,7 @@ export default function Cart() {
     <>
       <Button m={"5px"} ref={btnRef} onClick={onOpen}>
         <FaCartPlus />
-        {count && hbToken &&<div className="cart_count">{count}</div>}{" "}
+        {hbToken && <div className="cart_count">{count}</div>}{" "}
       </Button>
 
       <Drawer
@@ -151,7 +152,11 @@ export default function Cart() {
             <Button variant="outline" mr={3} onClick={onClose}>
               Cancel
             </Button>
-            <Button colorScheme="blue">Proceed</Button>
+            <Link to="/checkout"> <Button onClick={onClose} colorScheme="blue">
+            Proceed
+           
+            </Button>
+            </Link>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

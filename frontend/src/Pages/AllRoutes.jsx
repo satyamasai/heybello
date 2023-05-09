@@ -7,6 +7,7 @@ import Login from "./SignupandLogin/Login";
 import BrandProduct from "./BrandProduct/BrandProduct";
 import SingleProduct from "./Products/SingleProduct";
 import ProductSubpage from "./Subpages/ProductSubpage";
+import Checkout from "./Chekout/Checkout";
 
 
 
@@ -19,6 +20,7 @@ const AllRoutes = () => {
       <Route path="/specificbrand/:brandname" element={<BrandProduct />} />
       <Route path="/singleproduct/:id" element={<SingleProduct/>} />
       <Route path="/product/:productname" element={<ProductSubpage/>} />
+      <Route path="/checkout" element={<Checkout/>} />
      
     </Routes>
   );
