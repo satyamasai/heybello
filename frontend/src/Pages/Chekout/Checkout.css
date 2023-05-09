@@ -19,10 +19,10 @@ border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .payment_inner_div{
-    width: 95%;
+    width: 100%;
     margin:20px  auto;
     height: 90%;
-    /* border: 2px solid orangered; */
+    /* border: 1px solid rgb(230, 69, 10); */
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -30,7 +30,7 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     padding: 10px;
 }
 .coupon{
-    /* border: 1px solid red */
+    /* border: 1px solid red; */
     padding: 5px;
     display: flex;
     justify-content: space-between;
@@ -38,13 +38,13 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     align-items: center;
 }
 .payment{
-    width: 90%;
+    width: 100%;
     height: auto;
-    /* border: 1px solid rgb(71, 222, 241); */
+    border: 1px solid rgb(71, 222, 241);
  margin: auto;
 }
 .payment>div{
-    width: 90%;
+    width: 100%;
     margin: auto;
     height: 40px;
     text-align: center;

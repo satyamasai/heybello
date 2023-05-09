@@ -82,7 +82,7 @@ export default function Footer() {
 
           <Stack align={'flex-start'}>
             <ListHeader>Install App</ListHeader>
-            <Img src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' />
+            <Img width={'120px'} src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' />
             
           </Stack>
         </SimpleGrid>

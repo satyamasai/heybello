@@ -13,22 +13,28 @@ import {
   Box,
   Flex,
   Select,
+  useToast,
 } from "@chakra-ui/react";
 import { FaCartPlus } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { GET_ALL_CART_ITEMS, DELETE_CART_ITEM } from "../../Utils/url.js";
 import axios from "axios";
 import { Link } from "react-router-dom";
-export default function Cart() {
+export default function Cart({bnbrender}) {
+  console.log(bnbrender,'atcart')
   const [cartItems, setCartItems] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
   const [count,setCount]= useState(null)
-// let count=useRef();
+  const [render,setRender] = useState(true)
+  const toast = useToast();
+
   //----## getting cart items of user----///####-----
   const hbToken = JSON.parse(localStorage.getItem("hbToken"));
-  console.log("first");
+  
   useEffect(() => {
+    console.log("first");
+  // setRender(!render)
     const getcartItems = async (count) => {
       axios
         .get(`${GET_ALL_CART_ITEMS}`, {
@@ -36,18 +42,18 @@ export default function Cart() {
             Authorization: `Bearer ${hbToken}`,
           },
         })
-        .then((res) => {
+        .then(async(res) => {
           setCartItems(res.data.cart);
-          setCount(res.data.cart.length)
+          await setCount(res.data.cart.length)
           // count.current=res.data.cart.length;
-          console.log(count,"count");
+          // console.log(res.data.cart.length,"count");
         })
         .catch((err) => {
           console.log(err);
         });
     };
     getcartItems();
-  },[hbToken,count]);
+  },[hbToken,count,render,bnbrender]);
 
   // -----handle delete---####////
 
@@ -62,6 +68,13 @@ export default function Cart() {
       })
       .then((res) => {
         console.log(res);
+        toast({
+          title: `Item deleted`,
+          position: 'top-left',
+          isClosable: true,
+          status:'error'
+        });
+        setRender(!render)
         // window.location.reload()
       })
       .catch((err) => {
@@ -73,7 +86,7 @@ export default function Cart() {
     <>
       <Button m={"5px"} ref={btnRef} onClick={onOpen}>
         <FaCartPlus />
-        {hbToken && <div className="cart_count">{count}</div>}{" "}
+        {hbToken && <div className="cart_count">{cartItems.length}</div>}{" "}
       </Button>
 
       <Drawer
@@ -94,7 +107,7 @@ export default function Cart() {
                 mt={"4px"}
                 boxSizing="border-box"
                 w={"99%"}
-                border={"1px solid goldenrod"}
+                border={"1px solid pink"}
                 h={"150px"}
               >
                 <Flex h={"70%"} border={""}>
@@ -111,6 +124,7 @@ export default function Cart() {
                     m={"auto"}
                     h={"75%"}
                     border={""}
+                    fontSize={'12px'}
                   >
                     {item.product_details.name}-{item.product_details.brand}-{" "}
                     {item.product_details.product_type}
@@ -118,20 +132,20 @@ export default function Cart() {
                 </Flex>
                 <Flex
                   h={"30%"}
-                  border={""}
-                  justify={"space-between"}
+                  border={"0px solid red"}
+                  justify={"space-around"}
                   alignItems={"center"}
                   textAlign={"center"}
                 >
                   <Flex
                     p={"3px"}
                     justify={"space-between"}
-                    w={"55%"}
+                    w={"40%"}
                     alignItems={"center"}
-                    border={""}
+                    border={"0px solid red"}
                   >
-                    Quantity :
-                    <Select outline={"0"} border={"none"} w={"42%"}>
+                    Qty :
+                    <Select outline={"0"} border={"none"} w={"62%"}>
                       <option outline={"0"} value="1">
                         1
                       </option>

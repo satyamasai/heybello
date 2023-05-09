@@ -21,6 +21,7 @@ const Checkout = () => {
   const toast = useToast();
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [render,setRender] = useState(true)
   //   const [totalAmount, setTotalAmount] = useState(0);
   let quantities = [1, 2, 3, 4];
   //----## getting cart items of user----///####-----
@@ -43,7 +44,7 @@ const Checkout = () => {
         });
     };
     getcartItems();
-  }, [hbToken]);
+  }, [hbToken ,render]);
 
   //   --------------------set Total ammount-----------//
 
@@ -74,7 +75,8 @@ const Checkout = () => {
           isClosable: true,
           status:'error'
         });
-        window.location.reload()
+        setRender(!render)
+        // window.location.reload()
       })
       .catch((err) => {
         console.log(err);
@@ -106,7 +108,7 @@ const Checkout = () => {
               mt={"4px"}
               boxSizing="border-box"
               w={"99%"}
-              border={"1px solid goldenrod"}
+              border={"1px solid pink"}
               h={"150px"}
               p={"10px"}
             >
@@ -207,7 +209,7 @@ const Checkout = () => {
               </div>
               <div>
                 {" "}
-                <div>Total MRP</div> <div>{totalAmount.toFixed(2)}</div>{" "}
+                <div>Total MRP</div> <div> $ {totalAmount.toFixed(2)}</div>{" "}
               </div>
               <div>
                 {" "}
@@ -215,7 +217,7 @@ const Checkout = () => {
                 <div>
                   {" "}
                   <span className="redspan">
-                    -{((totalAmount * 20) / 100).toFixed(2)}
+                    -${((totalAmount * 20) / 100).toFixed(2)}
                   </span>
                 </div>{" "}
               </div>
@@ -229,7 +231,7 @@ const Checkout = () => {
               <div>
                 {" "}
                 <div>Total amount</div>{" "}
-                <div>{(totalAmount - (totalAmount * 20) / 100).toFixed(2)}</div>{" "}
+                <div>$ {(totalAmount - (totalAmount * 20) / 100).toFixed(2)}</div>{" "}
               </div>
             </div>
             <div className="place_order_btn">

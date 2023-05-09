@@ -56,14 +56,9 @@ const ProductSubpage = () => {
       allBrandsNames.push(allBrand[i].brand);
     }
    }
-  // allBrand.map( (el,index) => {
-  //   return(
+ 
 
-  //     )
-  // });
-  // console.log(allBrandsNames, "an");
-
-  // -------#######-----------#########_--------------------------////
+  // ---------GET products by CATEGORY----------------------------////
   const getProductsByCategory = (productname) => {
     setLoader(true);
     axios

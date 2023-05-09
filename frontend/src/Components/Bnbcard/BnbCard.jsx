@@ -10,10 +10,13 @@ import { StarIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
 import axios  from 'axios';
 import { ADD_TO_CART } from "../../Utils/url";
+import Cart from './../../Pages/Cart/Cart';
+import { useState } from 'react';
 
 export default function BnbCard({ item, handleViewSingle }) {
   // console.log("bnbitem",handleViewSingle)
   // console.log(item)
+  const [bnbrender,setbnbRender] = useState(0)
   const navigate= useNavigate()
   const {
     api_featured_image,
@@ -40,12 +43,11 @@ export default function BnbCard({ item, handleViewSingle }) {
   
   const toast = useToast();
   
-  
+  // -------handle --ADD TO CART-----------------//
   const handleAddToCart = (cartproduct) => {
     const hbToken = JSON.parse(localStorage.getItem("hbToken")) || null;
     cartproduct.price = Number(cartproduct.price);
-    console.log(hbToken, "hbToken");
-    console.log(cartproduct, "cp");
+   
     if (!hbToken) {
       toast({
         title: "LOGGING ERROR ",
@@ -56,8 +58,7 @@ export default function BnbCard({ item, handleViewSingle }) {
       });
       return navigate("/login");
     }
-    // cartItems.push(cartproduct);
-    // localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  
     axios
       .post(`${ADD_TO_CART}`, cartproduct, {
         headers: {
@@ -66,6 +67,7 @@ export default function BnbCard({ item, handleViewSingle }) {
       })
       .then((res) => {
         console.log(res);
+        setbnbRender(bnbrender+1)
         toast({
           title: "Product added.",
           description: "We've added your product to the cart.",
@@ -73,6 +75,7 @@ export default function BnbCard({ item, handleViewSingle }) {
           duration: 2000,
           isClosable: true,
         });
+       
       })
       .catch((err) => {
         console.log(err);
@@ -100,7 +103,12 @@ export default function BnbCard({ item, handleViewSingle }) {
       borderWidth="1px"
       // borderRadius="lg"
       overflow="hidden"
-    >
+    >{
+
+      <Box display={'none'} border={'1px solid red'}>
+      <Cart bnbrender={bnbrender}/>
+      </Box>
+    }
       {item ? (
         <Image
           onClick={() => handleViewSingle(item)}
