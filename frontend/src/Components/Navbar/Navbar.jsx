@@ -1,9 +1,10 @@
 import { useState } from "react";
 import mybellalogo from "./mybellalogo.jpg";
+import heybellologo from "../../Photo/heybellologo.jpg"
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import "./Navbar.css";
 import { Navigate, Link as ReactRouter, useNavigate } from "react-router-dom";
-import { FaCartPlus } from "react-icons/fa";
+import { FaTimes,FaAlignLeft } from "react-icons/fa";
 import {
   Box,
   Flex,
@@ -77,16 +78,81 @@ const navigate= useNavigate()
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <Box bg={""}>
+        <Box className="hamburger" display={{ md: "none" }} >
+        {!down ? (
+          <IconButton
+            onClick={setDown.on}
+            icon={<FaAlignLeft />}
+          />
+        ) : (
+          <IconButton onClick={setDown.off} icon={<FaTimes/>} />
+        )}
+        {down && (
+          <Flex
+            pos="absolute"
+            top="65px"
+            left={0}
+            w={"100vw"}
+            bg={"pink"}
+            direction={"column"}
+            zIndex={20}
+            className="nav_dropdownmenu"
+            p={"5px"}
+          >
+            {links.map((link) => (
+              <Link
+                onClick={setDown.off}
+                as={ReactRouter}
+                to={link.path}
+                m="8px"
+                width={"140px"}
+                borderBottom={"2px solid white"}
+                alignSelf={"center"}
+                fontWeight={"bolder"}
+              >
+                {link.label}
+              </Link>
+            ))}
+              {!hbToken ? (
+                <Box
+                  display={"flex"}
+                  justifyContent={"space-around"}
+                  m={"auto"}
+                  textAlign={"center"}
+                  w={"240px"}
+                  h={"40px"}
+                  border={"0px solid red"}
+                  alignItems={"center"}
+                >
+                  <Button  colorScheme="pink" size={"sm"}>
+                   <a href="/login">
+                   Login
+                   </a>
+                  </Button>{" "}
+                  <Button colorScheme="pink" size={"sm"}>
+                  <a href="/signup">
+                  Signup
+                  </a>
+                  </Button>
+                </Box>
+            ) : (
+              <Button omClick={handleLogout}  m={"auto"} w={"180px"} colorScheme="red">
+                Logout
+              </Button>
+            )}
+          </Flex>
+        )}
+      </Box> 
+        <Box bg={""}>
             <a href="/">
-              <img className="logo_img" src={mybellalogo} alt="logo" />{" "}
+              <img className="logo_img" src={heybellologo} alt="logo" />{" "}
             </a>
           </Box>
 
           <Flex w="40%" justifyContent={"space-around"}>
             <div className="category_nav_box">
               <Box
-                color={"goldenrod"}
+                color={"pink.400"}
                 justifyContent={"space-around"}
                 border="1px"
                 borderColor="grey.400"
@@ -97,7 +163,7 @@ const navigate= useNavigate()
                 alignItems={"center"}
               >
                 {links.map((link, index) => (
-                  <ReactRouter key={index} m="3px" to={link.path}>
+                  <ReactRouter className="navbar_links" key={index} m="3px" to={link.path}>
                     {link.label}
                   </ReactRouter>
                 ))}
@@ -105,76 +171,12 @@ const navigate= useNavigate()
           
               </Box>
             
-              <Box display={{ md: "none" }}>
-                {!down ? (
-                  <IconButton
-                    onClick={setDown.on}
-                    icon={<TriangleDownIcon />}
-                  />
-                ) : (
-                  <IconButton onClick={setDown.off} icon={<TriangleUpIcon />} />
-                )}
-                {down && (
-                  <Flex
-                    pos="absolute"
-                    top="65px"
-                    left={0}
-                    w={"100vw"}
-                    bg={"pink"}
-                    direction={"column"}
-                    zIndex={20}
-                    className="nav_dropdownmenu"
-                    p={"5px"}
-                  >
-                    {links.map((link) => (
-                      <Link
-                        onClick={setDown.off}
-                        as={ReactRouter}
-                        to={link.path}
-                        m="8px"
-                        width={"140px"}
-                        borderBottom={"2px solid white"}
-                        alignSelf={"center"}
-                        fontWeight={"bolder"}
-                      >
-                        {link.label}
-                      </Link>
-                    ))}
-                      {!hbToken ? (
-                        <Box
-                          display={"flex"}
-                          justifyContent={"space-around"}
-                          m={"auto"}
-                          textAlign={"center"}
-                          w={"240px"}
-                          h={"40px"}
-                          border={"0px solid red"}
-                          alignItems={"center"}
-                        >
-                          <Button  colorScheme="pink" size={"sm"}>
-                           <a href="/login">
-                           Login
-                           </a>
-                          </Button>{" "}
-                          <Button colorScheme="pink" size={"sm"}>
-                          <a href="/signup">
-                          Signup
-                          </a>
-                          </Button>
-                        </Box>
-                    ) : (
-                      <Button omClick={handleLogout}  m={"auto"} w={"180px"} colorScheme="red">
-                        Logout
-                      </Button>
-                    )}
-                  </Flex>
-                )}
-              </Box>
+            
             </div>
           </Flex>
 
           <Flex bg={""} alignItems={"center"}>
-            <Cart />
+            <Cart  />
             <Stack direction={"row"} spacing={7}>
               <Button onClick={toggleColorMode}>
                 {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
