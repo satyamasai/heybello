@@ -1,5 +1,5 @@
-export const PORT = 'http://localhost:8080'
-// export const PORT = 'https://hbserver-ous1.onrender.com'
+// export const PORT = 'http://localhost:8080'
+export const PORT = 'https://hbserver-ous1.onrender.com'
 
 export const SPECIFIC_BRAND_API = `${PORT}/getproductsbybrand`;
 export const ADD_TO_CART=`${PORT}/addtocart`
@@ -16,3 +16,9 @@ export const SEARCH_DATA = `${PORT}/products`;
 export const USER_LOGIN = `${PORT}/login`;
 export const USER_SIGNUP = `${PORT}/signup`;
 export const USER_PROFILE = `${PORT}/profile`;
+// payment api--
+
+
+export const PAYMENT_API =`${PORT}/order`;
+export const PAYMENT_VERIFY_API =`${PORT}/verify`;
+

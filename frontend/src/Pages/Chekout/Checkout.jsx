@@ -16,7 +16,12 @@ import {
 } from "@chakra-ui/react";
 import { MdCheckCircleOutline, MdDelete, MdLocalOffer } from "react-icons/md";
 import axios from "axios";
-import { GET_ALL_CART_ITEMS, DELETE_CART_ITEM } from "../../Utils/url.js";
+import {
+  GET_ALL_CART_ITEMS,
+  DELETE_CART_ITEM,
+  PAYMENT_API,
+  PAYMENT_VERIFY_API,
+} from "../../Utils/url.js";
 
 const Checkout = () => {
   const toast = useToast();
@@ -90,7 +95,7 @@ const Checkout = () => {
     amount = Number(amount);
     try {
       await axios
-        .post("http://localhost:8080/order", { amount: amount })
+        .post(PAYMENT_API, { amount: amount })
         .then((res) => {
           console.log(res);
           initPayment(res.data.data);
@@ -105,7 +110,7 @@ const Checkout = () => {
 
   //verify payment
   const initPayment = (data) => {
-    setLoader(true)
+    setLoader(true);
     console.log(data.amount, "init");
     const options = {
       key: "rzp_test_uKzyBv96uOgJVf",
@@ -117,7 +122,7 @@ const Checkout = () => {
       handler: async (response) => {
         try {
           axios
-            .post("http://localhost:8080/verify", response)
+            .post(PAYMENT_VERIFY_API, response)
             .then((res) => {
               console.log(res);
               setLoader(false);
