@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import heybellologo from "../../Photo/heybellologo.jpg";
 import "./Checkout.css";
 import {
   Box,
@@ -21,7 +22,8 @@ const Checkout = () => {
   const toast = useToast();
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [render,setRender] = useState(true)
+  const [loader, setLoader] = useState(false);
+  const [render, setRender] = useState(true);
   //   const [totalAmount, setTotalAmount] = useState(0);
   let quantities = [1, 2, 3, 4];
   //----## getting cart items of user----///####-----
@@ -44,7 +46,7 @@ const Checkout = () => {
         });
     };
     getcartItems();
-  }, [hbToken ,render]);
+  }, [hbToken, render]);
 
   //   --------------------set Total ammount-----------//
 
@@ -52,12 +54,11 @@ const Checkout = () => {
     return acc + item.price;
   }, 0);
 
-  console.log(totalAmount, "ta");
+  // console.log(totalAmount, "ta");
 
   // ---=-------------handle DELETE-----------####////
 
   const handleDeleteItem = (id) => {
-   
     const hbToken = JSON.parse(localStorage.getItem("hbToken")) || null;
     setLoading(true);
     axios
@@ -71,17 +72,69 @@ const Checkout = () => {
         setLoading(false);
         toast({
           title: `Item deleted`,
-          position: 'top-left',
+          position: "top-left",
           isClosable: true,
-          status:'error'
+          status: "error",
         });
-        setRender(!render)
+        setRender(!render);
         // window.location.reload()
       })
       .catch((err) => {
         console.log(err);
         setLoading(false);
       });
+  };
+
+  // -----handle-Payment------
+  const handlePayment = async (amount) => {
+    amount = Number(amount);
+    try {
+      await axios
+        .post("http://localhost:8080/order", { amount: amount })
+        .then((res) => {
+          console.log(res);
+          initPayment(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //verify payment
+  const initPayment = (data) => {
+    setLoader(true)
+    console.log(data.amount, "init");
+    const options = {
+      key: "rzp_test_uKzyBv96uOgJVf",
+      amount: Number(data.amount),
+      currency: data.currency,
+      name: "Hey Bello!",
+      image: heybellologo,
+      order_id: data.id,
+      handler: async (response) => {
+        try {
+          axios
+            .post("http://localhost:8080/verify", response)
+            .then((res) => {
+              console.log(res);
+              setLoader(false);
+            })
+            .catch((err) => {
+              setLoader(false);
+              console.log(err);
+            });
+        } catch (err) {
+          setLoader(false);
+          console.log(err);
+        }
+      },
+    };
+
+    const rzp1 = new window.Razorpay(options);
+    rzp1.open();
   };
 
   return (
@@ -231,12 +284,34 @@ const Checkout = () => {
               <div>
                 {" "}
                 <div>Total amount</div>{" "}
-                <div>$ {(totalAmount - (totalAmount * 20) / 100).toFixed(2)}</div>{" "}
+                <div>
+                  $ {(totalAmount - (totalAmount * 20) / 100).toFixed(2)}
+                </div>{" "}
               </div>
             </div>
             <div className="place_order_btn">
               {" "}
-              <Button colorScheme="blue">Place Order</Button>
+              {!loader ? (
+                <Button
+                  onClick={() =>
+                    handlePayment(
+                      (totalAmount - (totalAmount * 20) / 100).toFixed(2)
+                    )
+                  }
+                  colorScheme="blue"
+                >
+                  Place Order
+                </Button>
+              ) : (
+                <Button
+                  isLoading
+                  loadingText="Veryfying"
+                  colorScheme="teal"
+                  variant="outline"
+                >
+                  Submit
+                </Button>
+              )}
             </div>
           </Box>
         </Box>

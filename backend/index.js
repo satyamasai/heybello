@@ -6,6 +6,7 @@ const cors = require("cors");
 const { userRouter } = require("./Routes/user.routes");
 const { cartRouter } = require("./Routes/cart.routes");
 const { productRouter } = require("./Routes/product.routes");
+const razorpayRouter = require("./Routes/payment.route");
 app.use(express.json());
 app.use(cors());
 
@@ -23,6 +24,10 @@ app.use('/',cartRouter)
 
 //#
 app.use("/", productRouter);
+
+// razorpay api-----
+
+app.use("/", razorpayRouter);
 
 
 // ----Listening ---------

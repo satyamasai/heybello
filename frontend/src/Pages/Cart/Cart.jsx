@@ -33,7 +33,7 @@ export default function Cart({bnbrender}) {
   const hbToken = JSON.parse(localStorage.getItem("hbToken"));
   
   useEffect(() => {
-    console.log("first");
+    // console.log("first");
   // setRender(!render)
     const getcartItems = async (count) => {
       axios
