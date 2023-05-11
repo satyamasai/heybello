@@ -1,5 +1,6 @@
-import {createStore } from 'redux'
-import appreducer from "./App/appreducer.js"
-const store = createStore(appreducer)
+import { legacy_createStore } from "redux";
+import appreducer from './App/appreducer';
+
+const store= legacy_createStore(appreducer);
 
 export default store

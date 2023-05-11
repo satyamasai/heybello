@@ -13,32 +13,38 @@ import {
 import { MdAddShoppingCart } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import {GET_ALL_PRODUCTS} from "../../Utils/url.js"
+import { getItems, getcartItems } from "../../Redux/App/appactions";
+import { useDispatch, useSelector } from 'react-redux'
 const Trending = () => {
   const [trendingProducts, setTrendingProducts] = useState([]);
-  const [loader, setLoader] = useState(true);
+  const [loader, setLoader] = useState(false);
   const [cartLoader, setCartLoader] = useState(false);
   const navigate = useNavigate();
   const skelatonNums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   //---##--hbkey-----##
 
   // ------###----Get trendings------###---//
-  const getTrendingProduct = () => {
-    setLoader(true);
-    axios
-      .get(`${GET_ALL_PRODUCTS}`)
-      .then((res) => {
-        // console.log(res.data);
-        setTrendingProducts(res.data);
-        setLoader(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoader(false);
-      });
-  };
+  const items= useSelector(store=>store.items);
+  // console.log(items,'items')
 
+  // const getTrendingProduct = () => {
+  //   setLoader(true);
+  //   axios
+  //     .get(`${GET_ALL_PRODUCTS}`)
+  //     .then((res) => {
+  //       // console.log(res.data);
+  //       setTrendingProducts(res.data);
+  //       setLoader(false);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       setLoader(false);
+  //     });
+  // };
+const dispatch = useDispatch()
   useEffect(() => {
-    getTrendingProduct();
+    getItems(dispatch)
+    // getTrendingProduct();
   }, []);
 
   // ----###-----handleSingleProduct-----###----------
@@ -75,6 +81,8 @@ const Trending = () => {
       })
       .then((res) => {
         // console.log(res);
+        getcartItems(dispatch);
+
         toast({
           title: "Product added.",
           description: "We've added your product to the cart.",
@@ -101,7 +109,7 @@ const Trending = () => {
     <div className="trending">
       <div className="trending_grid" >
         {!loader &&
-          trendingProducts.map((product, index) => (
+          items?.map((product, index) => (
             <div key={index} className="t_product_card">
               <div className="sale_tag">
                 <img

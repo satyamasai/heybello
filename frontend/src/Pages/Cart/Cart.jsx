@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Cart.css";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Drawer,
   DrawerBody,
@@ -20,40 +21,46 @@ import { MdDelete } from "react-icons/md";
 import { GET_ALL_CART_ITEMS, DELETE_CART_ITEM } from "../../Utils/url.js";
 import axios from "axios";
 import { Link } from "react-router-dom";
-export default function Cart({bnbrender}) {
+import { getcartItems } from "../../Redux/App/appactions";
+export default function Cart({ bnbrender }) {
   // console.log(bnbrender,'atcart')
+  const dispatch = useDispatch();
   const [cartItems, setCartItems] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
-  const [count,setCount]= useState(null)
-  const [render,setRender] = useState(true)
+  const [count, setCount] = useState(null);
+  const [render, setRender] = useState(true);
   const toast = useToast();
 
   //----## getting cart items of user----///####-----
   const hbToken = JSON.parse(localStorage.getItem("hbToken"));
-  
+  const cart = useSelector((store) => store.cart);
+  console.log(cart.cart, "cart");
+
   useEffect(() => {
     // console.log("first");
-  // setRender(!render)
-    const getcartItems = async (count) => {
-      axios
-        .get(`${GET_ALL_CART_ITEMS}`, {
-          headers: {
-            Authorization: `Bearer ${hbToken}`,
-          },
-        })
-        .then((res) => {
-          setCartItems(res.data.cart);
-           setCount(res.data.cart.length)
-          // count.current=res.data.cart.length;
-          // console.log(res.data.cart.length,"count");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    getcartItems();
-  },[hbToken,count,render]);
+    // setRender(!render)
+    // const getcartItems = async (count) => {
+    //   axios
+    //     .get(`${GET_ALL_CART_ITEMS}`, {
+    //       headers: {
+    //         Authorization: `Bearer ${hbToken}`,
+    //       },
+    //     })
+    //     .then((res) => {
+    //       setCartItems(res.data.cart);
+    //        setCount(res.data.cart.length)
+    //       // count.current=res.data.cart.length;
+    //       // console.log(res.data.cart.length,"count");
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // };
+    // getcartItems();
+
+    getcartItems(dispatch);
+  }, [dispatch]);
 
   // -----handle delete---####////
 
@@ -68,13 +75,15 @@ export default function Cart({bnbrender}) {
       })
       .then((res) => {
         console.log(res);
+        getcartItems(dispatch);
+
         toast({
           title: `Item deleted`,
-          position: 'top-left',
+          position: "top-left",
           isClosable: true,
-          status:'error'
+          status: "error",
         });
-        setRender(!render)
+        setRender(!render);
         // window.location.reload()
       })
       .catch((err) => {
@@ -86,7 +95,7 @@ export default function Cart({bnbrender}) {
     <>
       <Button m={"5px"} ref={btnRef} onClick={onOpen}>
         <FaCartPlus />
-        {hbToken && <div className="cart_count">{cartItems.length}</div>}{" "}
+        {hbToken && <div className="cart_count">{cart.cart?.length}</div>}{" "}
       </Button>
 
       <Drawer
@@ -101,7 +110,7 @@ export default function Cart({bnbrender}) {
           <DrawerHeader>Cart</DrawerHeader>
 
           <DrawerBody className="drawer_body">
-            {cartItems.map((item, index) => (
+            {cart.cart?.map((item, index) => (
               <Box
                 key={index}
                 mt={"4px"}
@@ -124,7 +133,7 @@ export default function Cart({bnbrender}) {
                     m={"auto"}
                     h={"75%"}
                     border={""}
-                    fontSize={'12px'}
+                    fontSize={"12px"}
                   >
                     {item.product_details.name}-{item.product_details.brand}-{" "}
                     {item.product_details.product_type}
@@ -166,10 +175,11 @@ export default function Cart({bnbrender}) {
             <Button variant="outline" mr={3} onClick={onClose}>
               Cancel
             </Button>
-            <Link to="/checkout"> <Button onClick={onClose} colorScheme="blue">
-            Proceed
-           
-            </Button>
+            <Link to="/checkout">
+              {" "}
+              <Button onClick={onClose} colorScheme="blue">
+                Proceed
+              </Button>
             </Link>
           </DrawerFooter>
         </DrawerContent>
