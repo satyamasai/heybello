@@ -1,5 +1,5 @@
-export const PORT = 'http://localhost:8080'
-// export const PORT = 'https://hbserver-ous1.onrender.com'
+// export const PORT = 'http://localhost:8080'
+export const PORT = 'https://hbserver-ous1.onrender.com'
 
 export const SPECIFIC_BRAND_API = `${PORT}/getproductsbybrand`;
 export const ADD_TO_CART=`${PORT}/addtocart`
