@@ -8,6 +8,7 @@ import BrandProduct from "./BrandProduct/BrandProduct";
 import SingleProduct from "./Products/SingleProduct";
 import ProductSubpage from "./Subpages/ProductSubpage";
 import Checkout from "./Chekout/Checkout";
+import Order from "./Order/Order";
 
 
 
@@ -21,6 +22,7 @@ const AllRoutes = () => {
       <Route path="/singleproduct/:id" element={<SingleProduct/>} />
       <Route path="/product/:productname" element={<ProductSubpage/>} />
       <Route path="/checkout" element={<Checkout/>} />
+      <Route path="/myorder" element={<Order/>} />
      
     </Routes>
   );

@@ -90,15 +90,16 @@ const Checkout = () => {
       });
   };
 
-  // -----handle-Payment------
+  // -----handle-Payment---------------------------------------------//------
   const handlePayment = async (amount) => {
     amount = Number(amount);
     try {
       await axios
-        .post(PAYMENT_API, { amount: amount })
+        .post(PAYMENT_API, { amount: amount,cartDetails:cartItems })
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           initPayment(res.data.data);
+          console.log(res,"order respmnc")
         })
         .catch((err) => {
           console.log(err);
@@ -111,7 +112,7 @@ const Checkout = () => {
   //verify payment
   const initPayment = (data) => {
     setLoader(true);
-    console.log(data.amount, "init");
+    // console.log(data.amount, "init");
     const options = {
       key: "rzp_test_uKzyBv96uOgJVf",
       amount: Number(data.amount),
@@ -119,12 +120,14 @@ const Checkout = () => {
       name: "Hey Bello!",
       image: heybellologo,
       order_id: data.id,
+      notes:cartItems,
       handler: async (response) => {
         try {
           axios
             .post(PAYMENT_VERIFY_API, response)
             .then((res) => {
-              console.log(res);
+              console.log(res,"datatid");
+              handleOrder(cartItems)
               setLoader(false);
             })
             .catch((err) => {
@@ -137,10 +140,17 @@ const Checkout = () => {
         }
       },
     };
-
+setLoader(false)
     const rzp1 = new window.Razorpay(options);
     rzp1.open();
   };
+
+  // -------------handle order-----------------
+
+  const handleOrder=(cartData)=>{
+ console.log(cartData,"cd") 
+
+  }
 
   return (
     <div className="checkout">

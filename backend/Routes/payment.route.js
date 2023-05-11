@@ -6,7 +6,7 @@ require("dotenv").config();
 
 // ---order api
 razorpayRouter.post("/order", async (req, res) => {
-  console.log(req.body);
+  console.log(req.body,"ord bdy");
 
   try {
     const instance = new Razorpay({
@@ -17,6 +17,7 @@ razorpayRouter.post("/order", async (req, res) => {
     const options = {
       amount: req.body.amount * 100,
       currency: "INR",
+      
       receipt: crypto.randomBytes(10).toString("hex"),
     };
 
@@ -25,7 +26,8 @@ razorpayRouter.post("/order", async (req, res) => {
         console.log(error);
         return res.status(500).json({ msg: "Something went wrong!" });
       }
-      res.status(200).json({ data: order });
+      // console.log(order,'order')
+      res.status(200).json({ data: order,cartdetails:"satyam" });
     });
   } catch (err) {
     console.log(err);

@@ -1,9 +1,9 @@
-import { useState } from "react";
-import mybellalogo from "./mybellalogo.jpg";
+// import { useState } from "react";
+
 import heybellologo from "../../Photo/heybellologo.jpg"
-import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
+// import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import "./Navbar.css";
-import { Navigate, Link as ReactRouter, useNavigate } from "react-router-dom";
+import { Link as ReactRouter, useNavigate } from "react-router-dom";
 import { FaTimes,FaAlignLeft } from "react-icons/fa";
 import {
   Box,
@@ -16,12 +16,12 @@ import {
   MenuList,
   MenuItem,
   MenuDivider,
-  useDisclosure,
+  
   useColorModeValue,
   Stack,
   useColorMode,
   Center,
-  Text,
+  
   useBoolean,
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
@@ -55,19 +55,19 @@ const links = [
 export default function Navbar() {
   const [down, setDown] = useBoolean(false);
   const { colorMode, toggleColorMode } = useColorMode();
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const heyBelloLoginToken = false;
-  const [isBoxVisible, setIsBoxVisible] = useState(false);
+  // const { isOpen, onOpen, onClose } = useDisclosure();
+  // const heyBelloLoginToken = false;
+  // const [isBoxVisible, setIsBoxVisible] = useState(false);
 const navigate= useNavigate()
   const hbToken = JSON.parse(localStorage.getItem("hbToken")) || null;
 
-  const handleMouseOver = () => {
-    setIsBoxVisible(true);
-  };
+  // const handleMouseOver = () => {
+  //   setIsBoxVisible(true);
+  // };
 
-  const handleMouseOut = () => {
-    setIsBoxVisible(false);
-  };
+  // const handleMouseOut = () => {
+  //   setIsBoxVisible(false);
+  // };
 
   const handleLogout=()=>{
     localStorage.setItem("hbToken",null);
@@ -226,7 +226,10 @@ const navigate= useNavigate()
                   </Center>
                   <br />
                   <MenuDivider />
-                  <MenuItem>Your Servers</MenuItem>
+                  <MenuItem><Link to="/myorder">
+                  My orders 
+                  </Link>
+                  </MenuItem>
                   <MenuItem>Account Settings</MenuItem>
                   <MenuItem onClick={handleLogout}>Logout</MenuItem>
                 </MenuList>
