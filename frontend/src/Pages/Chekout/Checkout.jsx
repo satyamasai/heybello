@@ -22,40 +22,44 @@ import {
   PAYMENT_API,
   PAYMENT_VERIFY_API,
 } from "../../Utils/url.js";
+import { getcartItems } from "../../Redux/App/appactions";
+import { useDispatch, useSelector } from "react-redux";
+import store from "../../Redux/Store";
 
 const Checkout = () => {
   const toast = useToast();
-  const [cartItems, setCartItems] = useState([]);
+  // const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [loader, setLoader] = useState(false);
   const [render, setRender] = useState(true);
+  const dispatch = useDispatch();
   //   const [totalAmount, setTotalAmount] = useState(0);
   let quantities = [1, 2, 3, 4];
   //----## getting cart items of user----///####-----
   const hbToken = JSON.parse(localStorage.getItem("hbToken"));
-
+  const cartItems = useSelector((store) => store.cart);
   useEffect(() => {
-    const getcartItems = async (count) => {
-      axios
-        .get(`${GET_ALL_CART_ITEMS}`, {
-          headers: {
-            Authorization: `Bearer ${hbToken}`,
-          },
-        })
-        .then((res) => {
-          setCartItems(res.data.cart);
-          console.log(res.data.cart);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    getcartItems();
-  }, [hbToken, render]);
+    // const getcartItems = async (count) => {
+    //   axios
+    //     .get(`${GET_ALL_CART_ITEMS}`, {
+    //       headers: {
+    //         Authorization: `Bearer ${hbToken}`,
+    //       },
+    //     })
+    //     .then((res) => {
+    //       setCartItems(res.data.cart);
+    //       console.log(res.data.cart);
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // };
+    getcartItems(dispatch);
+  }, []);
 
   //   --------------------set Total ammount-----------//
 
-  let totalAmount = cartItems.reduce((acc, item) => {
+  let totalAmount = cartItems.cart.reduce((acc, item) => {
     return acc + item.price;
   }, 0);
 
@@ -73,7 +77,8 @@ const Checkout = () => {
         },
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
+        getcartItems(dispatch);
         setLoading(false);
         toast({
           title: `Item deleted`,
@@ -95,11 +100,11 @@ const Checkout = () => {
     amount = Number(amount);
     try {
       await axios
-        .post(PAYMENT_API, { amount: amount,cartDetails:cartItems })
+        .post(PAYMENT_API, { amount: amount, cartDetails: cartItems })
         .then((res) => {
           // console.log(res);
           initPayment(res.data.data);
-          console.log(res,"order respmnc")
+          console.log(res, "order respmnc");
         })
         .catch((err) => {
           console.log(err);
@@ -120,14 +125,14 @@ const Checkout = () => {
       name: "Hey Bello!",
       image: heybellologo,
       order_id: data.id,
-      notes:cartItems,
+      notes: cartItems,
       handler: async (response) => {
         try {
           axios
             .post(PAYMENT_VERIFY_API, response)
             .then((res) => {
-              console.log(res,"datatid");
-              handleOrder(cartItems)
+              console.log(res, "datatid");
+              handleOrder(cartItems);
               setLoader(false);
             })
             .catch((err) => {
@@ -140,17 +145,16 @@ const Checkout = () => {
         }
       },
     };
-setLoader(false)
+    setLoader(false);
     const rzp1 = new window.Razorpay(options);
     rzp1.open();
   };
 
   // -------------handle order-----------------
 
-  const handleOrder=(cartData)=>{
- console.log(cartData,"cd") 
-
-  }
+  const handleOrder = (cartData) => {
+    console.log(cartData, "cd");
+  };
 
   return (
     <div className="checkout">
@@ -169,7 +173,7 @@ setLoader(false)
           h={"auto"}
           border={"0px solid blue"}
         >
-          {cartItems.map((item, index) => (
+          {cartItems.cart?.map((item, index) => (
             <Box
               className="cart_card"
               key={index}

@@ -12,6 +12,8 @@ import axios  from 'axios';
 import { ADD_TO_CART } from "../../Utils/url";
 import Cart from './../../Pages/Cart/Cart';
 import { useState } from 'react';
+import { getcartItems } from "../../Redux/App/appactions";
+import { useDispatch } from "react-redux";
 
 export default function BnbCard({ item, handleViewSingle }) {
   // console.log("bnbitem",handleViewSingle)
@@ -39,7 +41,7 @@ export default function BnbCard({ item, handleViewSingle }) {
     rating: rating,
   };
 
-  // ----------##handle add to cart----##------------//
+ const dispatch= useDispatch()
   
   const toast = useToast();
   
@@ -75,6 +77,7 @@ export default function BnbCard({ item, handleViewSingle }) {
           duration: 2000,
           isClosable: true,
         });
+        getcartItems(dispatch)
        
       })
       .catch((err) => {
