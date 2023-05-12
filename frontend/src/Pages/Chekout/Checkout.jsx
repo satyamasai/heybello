@@ -59,7 +59,7 @@ const Checkout = () => {
 
   //   --------------------set Total ammount-----------//
 
-  let totalAmount = cartItems?.cart.reduce((acc, item) => {
+  let totalAmount = cartItems?.cart?.reduce((acc, item) => {
     return acc + item.price;
   }, 0);
 

@@ -1,6 +1,6 @@
 const initState = {
   cart: [],
-  items: [],
+
   isLoading: false,
   isError: false,
 };
