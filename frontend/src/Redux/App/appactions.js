@@ -19,6 +19,7 @@ export const getcartItems = async (dispatch) => {
     axios
       .get(GET_ALL_CART_ITEMS, {
         headers: {
+          
           Authorization: `Bearer ${hbToken}`,
         },
       })
