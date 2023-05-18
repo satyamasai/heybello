@@ -25,27 +25,12 @@ const Trending = () => {
 
   // ------###----Get trendings------###---//
   const items= useSelector(store=>store.items);
-  // console.log(items,'items')
 
-  // const getTrendingProduct = () => {
-  //   setLoader(true);
-  //   axios
-  //     .get(`${GET_ALL_PRODUCTS}`)
-  //     .then((res) => {
-  //       // console.log(res.data);
-  //       setTrendingProducts(res.data);
-  //       setLoader(false);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       setLoader(false);
-  //     });
-  // };
 const dispatch = useDispatch()
   useEffect(() => {
     getItems(dispatch)
-    // getTrendingProduct();
-  }, []);
+    
+  },[]);
 
   // ----###-----handleSingleProduct-----###----------
   const handleSingleProduct = (single_product) => {

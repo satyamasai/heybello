@@ -11,21 +11,23 @@ import {
 } from "@chakra-ui/react";
 import BnbCard from "../../Components/Bnbcard/BnbCard";
 import { GET_PRODUCTS_BY_TYPE } from "../../Utils/url";
+import { getProductsByCategory } from "../../Redux/App/appactions";
+import { useDispatch, useSelector } from "react-redux";
 let SkeletonNums = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19,
 ];
 
 const ProductSubpage = () => {
+  const dispatch= useDispatch();
   const navigate = useNavigate();
   const { productname } = useParams();
-  const [products, setProducts] = useState([]);
+  // const [products, setProducts] = useState([]);
   const [loader, setLoader] = useState(true);
-  console.log(productname, "PT");
+
   const [brand_name, setBrandName] = useState("");
   const [allBrand, setAllBrands] = useState([]);
-  const [searchParams,setSearchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams();
   let allBrandsNames = [];
-
   // ----### ---get all brands name ---####----//
 
   const getAllBrandsName = (productname) => {
@@ -33,51 +35,32 @@ const ProductSubpage = () => {
       .get(`${GET_PRODUCTS_BY_TYPE}/${productname}`)
       .then((res) => {
         setAllBrands(res.data);
-
-        // allBrand.map((el) => allBrandsNames.push(el.brand));
       })
       .catch((err) => {
         setLoader(false);
         console.log(err);
       });
   };
-
-  // --------if brand name
-
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // if(brand_name){
-  //   setSearchParams(brand_name)
-  // }
 
   // -----select - brand name only------------
-   for(let i=0;i<allBrand.length;i++){
-
-    if(!allBrandsNames.includes(allBrand[i].brand)) {
+  for (let i = 0; i < allBrand.length; i++) {
+    if (!allBrandsNames.includes(allBrand[i].brand)) {
       allBrandsNames.push(allBrand[i].brand);
     }
-   }
- 
+  }
 
-  // ---------GET products by CATEGORY----------------------------////
-  const getProductsByCategory = (productname) => {
-    setLoader(true);
-    axios
-      .get(`${GET_PRODUCTS_BY_TYPE}/${productname}`)
-      .then((res) => {
-        // console.log(res.data);
-        setLoader(false);
-        setProducts(res.data);
-      })
-      .catch((err) => {
-        setLoader(false);
-        console.log(err);
-      });
-  };
 
   useEffect(() => {
-    getProductsByCategory(productname);
+    getProductsByCategory(dispatch,productname);
     getAllBrandsName(productname);
-  }, [productname]);
+  }, []);
+
+
+  // ==prod nby type;
+
+  const products= useSelector(store=>store.products_by_type);
+  const loading=useSelector(store=>store.isLoading)
+  console.log(loading,"LL");
 
   // ------------------------handleViewSingle----------------------------
 
@@ -93,7 +76,7 @@ const ProductSubpage = () => {
       <Box
         alignItems={"center"}
         display={"flex"}
-        justifyContent={'space-around'}
+        justifyContent={"space-around"}
         h={"50px"}
         w={"100%"}
       >
@@ -110,7 +93,7 @@ const ProductSubpage = () => {
           onChange={(e) => {
             setBrandName(e.target.value);
             let params = { brand_name: e.target.value };
-           
+
             setSearchParams(params);
           }}
         >
@@ -122,7 +105,7 @@ const ProductSubpage = () => {
         </Select>
       </Box>
       <SimpleGrid columns={{ sm: 2, base: 1, md: 2, lg: 3, xl: 4 }}>
-        {!loader &&
+        {!loading &&
           products.map((item, index) => (
             <BnbCard
               key={index}

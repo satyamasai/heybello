@@ -38,29 +38,8 @@ export default function Cart({ bnbrender }) {
   console.log(cart.cart, "cart");
 
   useEffect(() => {
-    // console.log("first");
-    // setRender(!render)
-    // const getcartItems = async (count) => {
-    //   axios
-    //     .get(`${GET_ALL_CART_ITEMS}`, {
-    //       headers: {
-    //         Authorization: `Bearer ${hbToken}`,
-    //       },
-    //     })
-    //     .then((res) => {
-    //       setCartItems(res.data.cart);
-    //        setCount(res.data.cart.length)
-    //       // count.current=res.data.cart.length;
-    //       // console.log(res.data.cart.length,"count");
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // };
-    // getcartItems();
-
     getcartItems(dispatch);
-  }, [dispatch]);
+  }, []);
 
   // -----handle delete---####////
 

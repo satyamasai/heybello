@@ -77,7 +77,7 @@ export default function BnbCard({ item, handleViewSingle }) {
           duration: 2000,
           isClosable: true,
         });
-        getcartItems(dispatch)
+        // getcartItems(dispatch)
        
       })
       .catch((err) => {
