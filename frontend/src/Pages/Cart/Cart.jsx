@@ -39,7 +39,7 @@ export default function Cart({ bnbrender }) {
 
   useEffect(() => {
     getcartItems(dispatch);
-  }, []);
+  }, [dispatch]);
 
   // -----handle delete---####////
 

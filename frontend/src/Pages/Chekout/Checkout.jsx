@@ -39,21 +39,6 @@ const Checkout = () => {
   const hbToken = JSON.parse(localStorage.getItem("hbToken"));
   const cartItems = useSelector((store) => store.cart);
   useEffect(() => {
-    // const getcartItems = async (count) => {
-    //   axios
-    //     .get(`${GET_ALL_CART_ITEMS}`, {
-    //       headers: {
-    //         Authorization: `Bearer ${hbToken}`,
-    //       },
-    //     })
-    //     .then((res) => {
-    //       setCartItems(res.data.cart);
-    //       console.log(res.data.cart);
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // };
     getcartItems(dispatch);
   }, []);
 
@@ -281,16 +266,14 @@ const Checkout = () => {
               </div>
               <div>
                 {" "}
-                <div>Total MRP</div> <div> $ {totalAmount.toFixed(2)}</div>{" "}
+                <div>Total MRP</div> <div> $ {totalAmount}</div>{" "}
               </div>
               <div>
                 {" "}
                 <div>Discount (20%)</div>{" "}
                 <div>
                   {" "}
-                  <span className="redspan">
-                    -${((totalAmount * 20) / 100).toFixed(2)}
-                  </span>
+                  <span className="redspan">-${(totalAmount * 20) / 100}</span>
                 </div>{" "}
               </div>
               <div>
@@ -303,9 +286,7 @@ const Checkout = () => {
               <div>
                 {" "}
                 <div>Total amount</div>{" "}
-                <div>
-                  $ {(totalAmount - (totalAmount * 20) / 100).toFixed(2)}
-                </div>{" "}
+                <div>$ {totalAmount - (totalAmount * 20) / 100}</div>{" "}
               </div>
             </div>
             <div className="place_order_btn">
@@ -313,9 +294,7 @@ const Checkout = () => {
               {!loader ? (
                 <Button
                   onClick={() =>
-                    handlePayment(
-                      (totalAmount - (totalAmount * 20) / 100).toFixed(2)
-                    )
+                    handlePayment(totalAmount - (totalAmount * 20) / 100)
                   }
                   colorScheme="blue"
                 >
