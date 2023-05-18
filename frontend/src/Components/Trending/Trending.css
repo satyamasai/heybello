@@ -7,14 +7,14 @@
   padding: 25px;
   /* background-image: url('https://designstripe-secure.imgix.net/scene-snapshots/2c921df7-b862-4e64-b2db-5980479b219f/1647599252612/default?auto=format&h=1080&s=1070376a53e856a975df16270e9ecb35'); */
   background-size: 100%;
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     to right top,
     #dee3eb,
     #c5d0fa,
     #c1b7ff,
     #d198fd,
     #ec6de7
-  );
+  ); */
 }
 
 .t_product_card {
