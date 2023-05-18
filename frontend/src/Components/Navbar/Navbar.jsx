@@ -199,7 +199,7 @@ const navigate= useNavigate()
                     />
                   </MenuButton>
                 ) : (
-                  <Box display={{ sm: "none", base: "none" ,md:"flex"}}>
+                  <Box color={'pink.400'} fontWeight={'bold'} textAlign={'center'} p={'5px'} border={'0px solid red'} display={{ sm: "none", base: "none" ,md:"flex"}}>
                     <ReactRouter to="/login">
                       Login
                     </ReactRouter>
