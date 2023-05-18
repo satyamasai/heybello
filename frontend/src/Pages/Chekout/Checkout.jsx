@@ -4,20 +4,20 @@ import "./Checkout.css";
 import {
   Box,
   Button,
-  CheckboxIcon,
+ 
   Flex,
   Input,
   InputGroup,
   InputLeftElement,
   InputRightElement,
   Select,
-  useDisclosure,
+ 
   useToast,
 } from "@chakra-ui/react";
 import { MdCheckCircleOutline, MdDelete, MdLocalOffer } from "react-icons/md";
 import axios from "axios";
 import {
-  GET_ALL_CART_ITEMS,
+
   DELETE_CART_ITEM,
   PAYMENT_API,
   PAYMENT_VERIFY_API,
@@ -44,9 +44,11 @@ const Checkout = () => {
 
   //   --------------------set Total ammount-----------//
 
-  let totalAmount = cartItems?.cart?.reduce((acc, item) => {
-    return acc + item.price;
-  }, 0);
+ 
+    let totalAmount = cartItems?.cart?.reduce((acc, item) => {
+      return acc + item.price;
+    }, 0);
+    // totalAmount?.toFixed(2);
 
   // console.log(totalAmount, "ta");
 
@@ -71,8 +73,7 @@ const Checkout = () => {
           isClosable: true,
           status: "error",
         });
-        setRender(!render);
-        // window.location.reload()
+       
       })
       .catch((err) => {
         console.log(err);
@@ -89,7 +90,7 @@ const Checkout = () => {
         .then((res) => {
           // console.log(res);
           initPayment(res.data.data);
-          console.log(res, "order respmnc");
+          console.log(res, "order done");
         })
         .catch((err) => {
           console.log(err);
@@ -117,6 +118,8 @@ const Checkout = () => {
             .post(PAYMENT_VERIFY_API, response)
             .then((res) => {
               console.log(res, "datatid");
+              // ---after placed--
+
               handleOrder(cartItems);
               setLoader(false);
             })
