@@ -34,8 +34,9 @@ const toast= useToast()
       axios
       .post(`${USER_LOGIN}`, userLoginData)
       .then((res) => {
-        // console.log(res);
+        console.log(res,"user");
         localStorage.setItem("hbToken",JSON.stringify(res.data.token))
+        localStorage.setItem("hbUser",JSON.stringify(res.data))
         setLogging(false)
         navigate("/")
         toast({
