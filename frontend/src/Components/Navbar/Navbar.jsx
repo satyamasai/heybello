@@ -74,6 +74,7 @@ const navigate= useNavigate()
     navigate("/")
   }
 
+  // -------------get   Logged in user info-----
   return (
     
       <Box   bg={useColorModeValue("gray.100", "gray.900")} px={1}>

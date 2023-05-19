@@ -43,7 +43,9 @@ const userSignup = async (req, res) => {
 const userLogin = async (req, res) => {
   const { email, password } = req.body;
   const user = await userModel.findOne({ email });
+  console.log(user, "user");
   if (user) {
+    const { name, email, mobile } = user;
     const hashed_password = user.password;
     const user_id = user._id;
     bcrypt.compare(password, hashed_password, async (err, result) => {
@@ -58,6 +60,9 @@ const userLogin = async (req, res) => {
             message: "Login successful",
             token: token,
             id: user._id,
+            name,
+            mobile,
+            email,
           });
         } else {
           res.status(500).send({ message: "Login failed", status: "Failed" });
