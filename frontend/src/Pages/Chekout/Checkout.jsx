@@ -4,20 +4,19 @@ import "./Checkout.css";
 import {
   Box,
   Button,
- 
+  CheckboxIcon,
   Flex,
   Input,
   InputGroup,
   InputLeftElement,
   InputRightElement,
   Select,
- 
   useToast,
 } from "@chakra-ui/react";
 import { MdCheckCircleOutline, MdDelete, MdLocalOffer } from "react-icons/md";
 import axios from "axios";
 import {
-
+  GET_ALL_CART_ITEMS,
   DELETE_CART_ITEM,
   PAYMENT_API,
   PAYMENT_VERIFY_API,
@@ -44,11 +43,10 @@ const Checkout = () => {
 
   //   --------------------set Total ammount-----------//
 
- 
-    let totalAmount = cartItems?.cart?.reduce((acc, item) => {
-      return acc + item.price;
-    }, 0);
-    // totalAmount?.toFixed(2);
+  let totalAmount = cartItems?.cart?.reduce((acc, item) => {
+    return acc + item.price;
+  }, 0);
+  // totalAmount?.toFixed(2);
 
   // console.log(totalAmount, "ta");
 
@@ -73,7 +71,6 @@ const Checkout = () => {
           isClosable: true,
           status: "error",
         });
-       
       })
       .catch((err) => {
         console.log(err);
@@ -83,7 +80,7 @@ const Checkout = () => {
 
   // -----handle-Payment---------------------------------------------//------
   const handlePayment = async (amount) => {
-    amount = Number(amount);
+    amount = Number(amount.toFixed(2));
     try {
       await axios
         .post(PAYMENT_API, { amount: amount, cartDetails: cartItems })
@@ -269,14 +266,15 @@ const Checkout = () => {
               </div>
               <div>
                 {" "}
-                <div>Total MRP</div> <div> $ {totalAmount}</div>{" "}
+                <div>Total MRP</div>{" "}
+                {totalAmount && <div> $ {totalAmount.toFixed(2)}</div>}{" "}
               </div>
               <div>
                 {" "}
                 <div>Discount (20%)</div>{" "}
                 <div>
                   {" "}
-                  <span className="redspan">-${(totalAmount * 20) / 100}</span>
+                  <span className="redspan">-${totalAmount && (totalAmount.toFixed(2) * 20) / 100}</span>
                 </div>{" "}
               </div>
               <div>
@@ -289,15 +287,15 @@ const Checkout = () => {
               <div>
                 {" "}
                 <div>Total amount</div>{" "}
-                <div>$ {totalAmount - (totalAmount * 20) / 100}</div>{" "}
+                {totalAmount && <div>$ {totalAmount.toFixed(2) - (totalAmount.toFixed(2) * 20) / 100}</div>}{" "}
               </div>
             </div>
             <div className="place_order_btn">
               {" "}
-              {!loader ? (
+              {!loader && totalAmount ? (
                 <Button
                   onClick={() =>
-                    handlePayment(totalAmount - (totalAmount * 20) / 100)
+                    handlePayment(totalAmount.toFixed(2) - (totalAmount.toFixed(2) * 20) / 100)
                   }
                   colorScheme="blue"
                 >
