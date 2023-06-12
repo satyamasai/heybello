@@ -27,7 +27,7 @@ razorpayRouter.post("/order", async (req, res) => {
         return res.status(500).json({ msg: "Something went wrong!" });
       }
       // console.log(order,'order')
-      res.status(200).json({ data: order,cartdetails:"satyam" });
+      res.status(200).json({ data: order,cartdetails:req.body });
     });
   } catch (err) {
     console.log(err);
@@ -50,7 +50,10 @@ razorpayRouter.post("/verify", async (req, res) => {
       .digest("hex");
 
     if (razorpay_signature === expectedSign) {
+
       return res.status(200).json({ msg: "Payment verified successfully!" });
+         
+
     } else {
       return res.status(400).json({ msg: "Invalid signature sent!" });
     }

@@ -100,7 +100,7 @@ const Checkout = () => {
   //verify payment
   const initPayment = (data) => {
     setLoader(true);
-    // console.log(data.amount, "init");
+   
     const options = {
       key: "rzp_test_uKzyBv96uOgJVf",
       amount: Number(data.amount),
