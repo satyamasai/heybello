@@ -25,8 +25,10 @@ const Trending = () => {
 
   // ------###----Get trendings------###---//
   const items= useSelector(store=>store.items);
+  // if(items)setLoader(false);
+  console.log(items.length,"check")
 
-const dispatch = useDispatch()
+   const dispatch = useDispatch()
   useEffect(() => {
     getItems(dispatch)
     
@@ -93,8 +95,8 @@ const dispatch = useDispatch()
   return (
     <div className="trending">
       <div className="trending_grid" >
-        {!loader &&
-          items?.map((product, index) => (
+        {items.length>0? 
+          items.map((product, index) => (
             <div key={index} className="t_product_card">
               <div className="sale_tag">
                 <img
@@ -140,6 +142,25 @@ const dispatch = useDispatch()
                 </div>
               </div>
             </div>
+          )): skelatonNums.map((el, index) => (
+            <Box
+              key={index}
+              borderRadius={12}
+              m={5}
+              w={240}
+              h={340}
+              padding="6"
+              boxShadow="lg"
+              bg="grey.200"
+            >
+              <SkeletonCircle size="10" />
+              <SkeletonText
+                mt="4"
+                noOfLines={4}
+                spacing="4"
+                skeletonHeight="2"
+              />
+            </Box>
           ))}
 
         {loader &&
